@@ -1,9 +1,7 @@
 package com.demo.comentoStatistic.service;
 
 import com.demo.comentoStatistic.dao.StatisticMapper;
-import com.demo.comentoStatistic.dto.YearCountDto;
-import com.demo.comentoStatistic.dto.YearMonthCountDto;
-import lombok.RequiredArgsConstructor;
+import com.demo.comentoStatistic.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +19,26 @@ public class StatisticService {
     public YearMonthCountDto getYearMonthLogins(String year, String month){
 
         return statisticMapper.selectYearMonthLogin(year+month);
+    }
+
+    public YearMonthDayCountDto getYearMonthDayLogins(String year, String month, String day){
+        return statisticMapper.selectYearMonthDayLogin(year+month+day);
+    }
+
+    public LoginCountDto getAllLogins(){
+        return statisticMapper.selectAllLogin();
+    }
+
+    public double getAvgDailyLogin() {
+        return statisticMapper.selectAvgDailyLogin();
+    }
+
+    public LoginRequestCountDto getLoginRequests(){
+        return statisticMapper.selectAllLoginRequest();
+    }
+
+    public LoginRequestDayCountDto getYearMonthDayLoginRequests(String year, String month, String day){
+        return statisticMapper.selectYearMonthDayLoginRequest(year+month+day);
     }
 
 

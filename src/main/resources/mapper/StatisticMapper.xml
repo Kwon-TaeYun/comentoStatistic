@@ -4,18 +4,73 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.demo.comentoStatistic.dao.StatisticMapper">
-
+    <!-- 1. 년도별 접속사 수 조회 -->
     <select id="selectYearLogin" parameterType="string" resultType="YearCountDto">
         select concat('20', #{year}) as year, count(*) as totCnt
         from statistic.request_info ri
-        where left(ri.create_date, 2) = #{year};
+        where left(ri.create_date, 2) = #{year} and request_code = 'L';
     </select>
 
-
+    <!-- 2. 월별 접속사 수 조회  -->
     <select id="selectYearMonthLogin" parameterType="string" resultType="YearMonthCountDto">
         select concat('20', #{yearMonth}) as yearMonth, count(*) as totCnt
         from statistic.request_info ri
-        where left(ri.create_date, 4) = #{yearMonth};
+        where left(ri.create_date, 4) = #{yearMonth} and request_code = 'L';
     </select>
+
+    <!-- 3. 일자별 접속사 수 조회  -->
+    <select id="selectYearMonthDayLogin" parameterType="string" resultType="YearMonthDayCountDto">
+        select concat('20', #{yearMonthDay}) as yearMonthDay, count(*) as totCnt
+        from statistic.request_info ri
+        where left(ri.create_date, 6) = #{yearMonthDay} and request_code = 'L';
+    </select>
+
+    <!-- 4. 평균 하루 접속사 수 조회  -->
+    <select id="selectAvgDailyLogin" resultType="double">
+        SELECT AVG(daily_cnt)
+        FROM (
+        SELECT
+        SUBSTRING(create_date, 1, 6) AS day,
+        COUNT(*) AS daily_cnt
+        FROM statistic.request_info ri
+        WHERE request_code = 'L'
+        GROUP BY SUBSTRING(create_date, 1, 6)
+        ) t
+    </select>
+    <!-- 5. 휴일을 제외한 로그인 접속사 수 조회  -->
+
+    <!-- 6. 부서별 접속사 수 조회  -->
+
+    <!-- 7. 부서별 월별 접속사 수 조회  -->
+
+    <!-- 8. 접속사 수 조회 -->
+    <select id="selectAllLogin" parameterType="string" resultType="LoginCountDto">
+        select count(*) as totCnt
+        from statistic.request_info ri
+        where request_code = 'L';
+    </select>
+
+    <!-- 9. 해당 날짜 로그인 요청 수 조회  -->
+    <select id="selectYearMonthDayLoginRequest"
+            parameterType="string"
+            resultType="LoginRequestDayCountDto">
+        SELECT
+        SUBSTRING(create_date, 1, 6) AS yearMonthDay,
+        COUNT(*) AS totCnt
+        FROM statistic.request_info
+        WHERE request_code = 'LR'
+        AND SUBSTRING(create_date, 1, 6) = #{yearMonthDay}
+        GROUP BY SUBSTRING(create_date, 1, 6)
+    </select>
+
+
+    <!-- 10. 전체 로그인 요청 수 조회  -->
+    <select id="selectAllLoginRequest" parameterType="string" resultType="LoginRequestCountDto">
+        select count(*) as totCnt
+        from statistic.request_info ri
+        where request_code = 'LR';
+    </select>
+
+    <!-- 11. 게시글 작성 수 조회  -->
 
 </mapper>
