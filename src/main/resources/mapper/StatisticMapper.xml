@@ -39,9 +39,36 @@
     </select>
     <!-- 5. 휴일을 제외한 로그인 접속사 수 조회  -->
 
-    <!-- 6. 부서별 접속사 수 조회  -->
+    <!-- 6. 부서별 접속자 수 조회 -->
+    <select id="selectConnectedUserCountByDepartment" parameterType="string"
+            resultType="DepartmentUserCountDto">
+        SELECT
+        u.hr_organ AS department,
+        COUNT(DISTINCT u.user_id) AS connectedUserCount
+        FROM statistic.request_info ri
+        JOIN statistic.user u
+        ON ri.user_id = u.user_id
+        WHERE ri.request_code = 'L'
+        AND u.hr_organ = #{department}
+        GROUP BY u.hr_organ
+    </select>
 
     <!-- 7. 부서별 월별 접속사 수 조회  -->
+    <select id="selectDepartmentMonthUserCount"
+            parameterType="map"
+            resultType="DepartmentMonthUserCountDto">
+        SELECT
+        u.hr_organ AS department,
+        concat('20', #{yearMonth}) as yearMonth,
+        COUNT(DISTINCT u.user_id) AS connectedUserCount
+        FROM statistic.request_info ri
+        JOIN statistic.user u
+        ON ri.user_id = u.user_id
+        WHERE ri.request_code = 'L'
+        AND u.hr_organ = #{department}
+        AND left(ri.create_date, 4) = #{yearMonth}
+        GROUP BY u.hr_organ, yearMonth
+    </select>
 
     <!-- 8. 접속사 수 조회 -->
     <select id="selectAllLogin" parameterType="string" resultType="LoginCountDto">

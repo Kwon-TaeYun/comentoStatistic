@@ -5,6 +5,9 @@ import com.demo.comentoStatistic.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class StatisticService {
 
@@ -40,6 +43,29 @@ public class StatisticService {
     public LoginRequestDayCountDto getYearMonthDayLoginRequests(String year, String month, String day){
         return statisticMapper.selectYearMonthDayLoginRequest(year+month+day);
     }
+
+    public DepartmentUserCountDto getLoginByDepartment(String department) {
+        return statisticMapper.selectConnectedUserCountByDepartment(department);
+    }
+
+    public DepartmentMonthUserCountDto getDepartmentMonthUserCount(
+            String department, String year, String month) {
+
+         // "2024","08" -> "2408"
+        DepartmentMonthUserCountDto dto =
+                statisticMapper.selectDepartmentMonthUserCount(department, year+month);
+
+        if (dto == null) {
+            dto = new DepartmentMonthUserCountDto();
+            dto.setDepartment(department);
+            dto.setYearMonth(year+month);
+            dto.setConnectedUserCount(0);
+        }
+
+        return dto;
+    }
+
+
 
 
 
