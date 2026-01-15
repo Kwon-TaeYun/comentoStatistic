@@ -65,6 +65,22 @@ public class StatisticService {
         return dto;
     }
 
+    public UserBoardSummaryDto getUserBoardSummary(String userId) {
+
+        int count = statisticMapper.selectBoardCountByUserId(userId);
+        List<BoardDto> boards = statisticMapper.selectBoardsByUserId(userId);
+
+        UserBoardSummaryDto dto = new UserBoardSummaryDto();
+        dto.setPostCount(count);
+        dto.setBoards(boards);
+
+        return dto;
+    }
+
+    public LoginCountDto getLoginCountExcludeHoliday() {
+        return statisticMapper.selectLoginCountExcludeHoliday();
+    }
+
 
 
 

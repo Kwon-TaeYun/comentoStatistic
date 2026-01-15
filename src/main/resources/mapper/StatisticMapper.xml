@@ -38,6 +38,15 @@
         ) t
     </select>
     <!-- 5. 휴일을 제외한 로그인 접속사 수 조회  -->
+    <select id="selectLoginCountExcludeHoliday"
+            resultType="com.demo.comentoStatistic.dto.LoginCountDto">
+        SELECT COUNT(*) AS totCnt
+        FROM statistic.request_info ri
+        LEFT JOIN statistic.holiday h
+        ON LEFT(ri.create_date, 8) = h.holiday_date
+        WHERE ri.request_code = 'L'
+        AND h.holiday_date IS NULL
+    </select>
 
     <!-- 6. 부서별 접속자 수 조회 -->
     <select id="selectConnectedUserCountByDepartment" parameterType="string"
@@ -99,5 +108,23 @@
     </select>
 
     <!-- 11. 게시글 작성 수 조회  -->
+    <select id="selectBoardsByUserId"
+            resultType="com.demo.comentoStatistic.dto.BoardDto">
+        SELECT
+        b.board_id AS id,
+        b.title
+        FROM statistic.board b
+        WHERE b.user_id = #{userId}
+        ORDER BY b.board_id DESC
+    </select>
+
+    <select id="selectBoardCountByUserId"
+            resultType="int">
+        SELECT COUNT(*)
+        FROM statistic.board
+        WHERE user_id = #{userId}
+    </select>
+
+
 
 </mapper>

@@ -22,5 +22,10 @@ public interface StatisticMapper {
             @Param("department") String department,
             String yearMonth
     );
+    int selectBoardCountByUserId(@Param("userId") String userId);
+
+    List<BoardDto> selectBoardsByUserId(@Param("userId") String userId);
+
+    LoginCountDto selectLoginCountExcludeHoliday();
 }
 

@@ -1,15 +1,10 @@
 package com.demo.comentoStatistic.controller;
 
-import com.demo.comentoStatistic.dto.DepartmentMonthUserCountDto;
-import com.demo.comentoStatistic.dto.DepartmentUserCountDto;
-import com.demo.comentoStatistic.dto.YearCountDto;
+import com.demo.comentoStatistic.dto.*;
 import com.demo.comentoStatistic.service.StatisticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -104,5 +99,19 @@ public class StatisticController {
                 statisticService.getDepartmentMonthUserCount(decodedDept, year, month);
 
         return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/api/v1/boards/users/{userId}")
+    public ResponseEntity<UserBoardSummaryDto> getBoardsByUser(
+            @PathVariable String userId) {
+
+        return ResponseEntity.ok(
+                statisticService.getUserBoardSummary(userId)
+        );
+    }
+
+    @GetMapping("/api/v1/logins/exclude-holidays")
+    public LoginCountDto getLoginExcludeHoliday() {
+        return statisticService.getLoginCountExcludeHoliday();
     }
 }
