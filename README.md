@@ -39,5 +39,64 @@
 
 ---
 
+# 3. REST API
+
+## 3-1. HTTP 통신이란?
+
+HTTP(HyperText Transfer Protocol)는 클라이언트(브라우저, 앱)가 서버(웹 서버, API 서버)에 요청(Request)을 보내고 응답(Response)을 받기 위한 통신 규칙(프로토콜)이다.
+
+HTTP 통신 구조  
+HTTP는 요청(Request) → 응답(Response) 구조로 동작한다.
+
+요청(Request) 구성 요소  
+- 메서드 (GET, POST 등)  
+- URL  
+- Header  
+- Body (선택)  
+
+응답(Response) 구성 요소  
+- 상태 코드  
+- Header  
+- Body  
+
+HTTP 특징  
+- 무상태성(Stateless): 서버는 이전 요청을 기억하지 않음 (쿠키, 세션, JWT로 보완)  
+- 비연결성(Connectionless): 요청/응답 후 연결 종료 (HTTP/1.1 Keep-Alive)  
+- 텍스트 기반 통신(JSON, HTML 등)  
+
+HTTP 메서드  
+- GET: 조회  
+- POST: 생성  
+- PUT: 전체 수정  
+- PATCH: 일부 수정  
+- DELETE: 삭제  
+
+HTTP 상태 코드  
+- 200 성공  
+- 201 생성 성공  
+- 400 잘못된 요청  
+- 401 인증 필요  
+- 403 권한 없음  
+- 404 리소스 없음  
+- 500 서버 오류  
+
+HTTP vs HTTPS  
+- HTTP: 평문 통신, 포트 80  
+- HTTPS: SSL/TLS 암호화, 포트 443  
+
+## 3-2. 브라우저에 URL 입력 후 요청/응답 과정
+
+1. URL 입력  
+2. DNS 조회 (Domain → IP)  
+3. TCP 연결 (3-way handshake)  
+4. TLS 핸드셰이크 (HTTPS)  
+5. HTTP 요청 전송  
+6. 서버 처리 (Filter → Interceptor → Controller → Service → DB)  
+7. HTTP 응답 반환  
+8. 브라우저 렌더링 (DOM → CSSOM → Render Tree → Layout → Paint)  
+9. 추가 리소스 요청 (CSS, JS, Image)
+
+전체 흐름 요약  
+URL 입력 → DNS → TCP → TLS → HTTP 요청 → 서버 처리 → HTTP 응답 → 브라우저 렌더링
 
 
