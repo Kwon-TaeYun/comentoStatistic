@@ -19,25 +19,60 @@ public class StatisticController {
     StatisticService statisticService;
 
 
-    @GetMapping(value="/logins", produces = "application/json")
-    @ResponseBody
-    public ResponseEntity<?> getYearLoginCount(@RequestParam("year") String year) {
+//    @GetMapping(value="/logins", produces = "application/json")
+//    @ResponseBody
+//    public ResponseEntity<?> getYearLoginCount(@RequestParam("year") String year) {
+//        try {
+//            YearCountDto result = statisticService.getYearLogins(year);
+//            return ResponseEntity.ok(ApiResponse.success(result, year + "년 로그인 통계 조회 성공!"));
+//        } catch (IllegalArgumentException e) {
+//            return ResponseEntity.badRequest().body(ApiResponse.fail(e.getMessage()));
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body(ApiResponse.fail("서버 오류가 발생했습니다."));
+//        }
+//    }
+//
+//    @GetMapping(value="/logins", produces = "application/json")
+//    @ResponseBody
+//    public Object getYearMonthLoginCount(@RequestParam("year") String year, @RequestParam("month") String month){
+//        try {
+//            YearMonthCountDto result = statisticService.getYearMonthLogins(year, month);
+//            return ResponseEntity.ok(ApiResponse.success(result, year + "년 " + month + "월 로그인 통계 조회 성공!"));
+//        } catch (IllegalArgumentException e) {
+//            return ResponseEntity.badRequest().body(ApiResponse.fail(e.getMessage()));
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body(ApiResponse.fail("서버 오류가 발생했습니다."));
+//        }
+//    }
+
+    @GetMapping(value = "/logins", produces = "application/json")
+    public ResponseEntity<?> getLoginCount(
+            @RequestParam("year") String year,
+            @RequestParam(value = "month", required = false) String month
+    ) {
         try {
-            YearCountDto result = statisticService.getYearLogins(year);
-            return ResponseEntity.ok(ApiResponse.success(result, year + "년 로그인 통계 조회 성공!"));
+            // month가 없으면 연도별
+            if (month == null) {
+                YearCountDto result = statisticService.getYearLogins(year);
+                return ResponseEntity.ok(
+                        ApiResponse.success(result, year + "년 로그인 통계 조회 성공!")
+                );
+            }
+
+            // month가 있으면 연+월별
+            YearMonthCountDto result = statisticService.getYearMonthLogins(year, month);
+            return ResponseEntity.ok(
+                    ApiResponse.success(result, year + "년 " + month + "월 로그인 통계 조회 성공!")
+            );
+
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(ApiResponse.fail(e.getMessage()));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(ApiResponse.fail("서버 오류가 발생했습니다."));
         }
-    }
-
-    @RequestMapping(value="/api/v1/logins/{year}/{month}", produces = "application/json")
-    @ResponseBody
-    public Object getYearMonthLoginCount(@PathVariable("year") String year, @PathVariable("month") String month){
-
-        return ResponseEntity.ok(statisticService.getYearMonthLogins(year, month));
     }
 
     @RequestMapping(value="/api/v1/logins/{year}/{month}/{day}", produces = "application/json")
