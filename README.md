@@ -58,7 +58,7 @@
 
 ## 📌 1. 년도별 접속자 수 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/8c5e1a20-df1f-42bc-b879-fd64fc700537" />
-<img width="728" height="455" alt="image" src="https://github.com/user-attachments/assets/4fa6fb89-8cfb-45f9-ba94-a2ad7b342ed5" />
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/4fa6fb89-8cfb-45f9-ba94-a2ad7b342ed5" />
 
 ---
 
