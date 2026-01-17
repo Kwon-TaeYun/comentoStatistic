@@ -5,26 +5,47 @@
 
 # 1. 2차 API 문서 (V2.0)
 
-## 📌 1. 접속자 수 조회
+## 📌 1. 년도 별 접속자 수(로그인 수) 조회
 
-### 🔹 [GET] /comento/users - 접속자 수 조회
+### 🔹 [GET] `/api/v1/logins` - 년도 별 접속자 수(로그인 수) 조회
 
-설명  
-- 서비스에 접속한 사용자 수를 조회하는 API
+**설명**:
 
-요청 정보  
-- Method: GET  
-- URL: http://localhost/comento/users  
-- Headers: 없음  
-- Body: 없음  
+특정 년도의 서비스 접속자 수(로그인 수)를 조회하는 API
 
-응답 예시 (200 OK)  
+쿼리 파라미터로 “year”을 전달 받는다.
+
+### ✅ 요청 정보
+
+- **Method**: `GET`
+- **URL**: `http://localhost:8031/api/v1/logins`
+- **Headers**: 없음.
+- **Query Parameter**
+
+| 이름 | 값 | 설명 |
+| --- | --- | --- |
+| year | String | 조회할 년도(끝 2자리) |
+- **Form Data**: 없음.
+
+### 📥 응답 예시 (`200 OK`)
+
+```json
 {
-  "connectedUserCount": 128
+  "success": true,
+  "message": "22년 로그인 통계 조회 성공!",
+  "data": {
+    "year": "2022",
+    "totCnt": 3
+  }
 }
 
-에러 응답  
-- 500 INTERNAL_SERVER_ERROR : 서버 오류
+
+### ❌ 에러 응답
+
+| 코드 | 메시지 | 설명 |
+| --- | --- | --- |
+| 400 | year는 2자리 숫자여야 합니다. | year 파라미터 형식이 잘못된 경우 |
+| 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 
 
 ## 작성 문서
