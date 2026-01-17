@@ -38,6 +38,7 @@
     "totCnt": 3
   }
 }
+```
 
 ### ❌ 에러 응답
 
@@ -46,12 +47,11 @@
 | 400 | year는 2자리 숫자여야 합니다. | year 파라미터 형식이 잘못된 경우 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 
----
 
 ## 작성 문서
 - Word:: [API문서_코멘토_권태윤_260103.docx](https://github.com/user-attachments/files/24415496/API._._._260103.docx) 
 - Notion: https://www.notion.so/API-2dd98cfebe1e80d68de2cbf9e0749274
----
+
 
 
 # 2. 실행 화면
