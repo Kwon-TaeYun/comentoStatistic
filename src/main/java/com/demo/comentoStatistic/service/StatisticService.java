@@ -14,9 +14,18 @@ public class StatisticService {
     @Autowired
     StatisticMapper statisticMapper;
 
-    public YearCountDto getYearLogins(String year){
+    public YearCountDto getYearLogins(String year) {
+        // 숫자 체크
+        if (!year.matches("\\d{2}")) {
+            throw new IllegalArgumentException("year는 2자리 숫자여야 합니다.");
+        }
 
-        return statisticMapper.selectYearLogin(year);
+        YearCountDto result = statisticMapper.selectYearLogin(year);
+        if (result == null) {
+            throw new IllegalArgumentException(year + "년의 로그인 데이터가 없습니다.");
+        }
+
+        return result;
     }
 
     public YearMonthCountDto getYearMonthLogins(String year, String month){

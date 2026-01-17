@@ -1,8 +1,10 @@
 package com.demo.comentoStatistic.controller;
 
+import com.demo.comentoStatistic.config.ApiResponse;
 import com.demo.comentoStatistic.dto.*;
 import com.demo.comentoStatistic.service.StatisticService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,17 +12,25 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 
 @RestController
+@RequestMapping("/api/v1")
 public class StatisticController {
 
     @Autowired
     StatisticService statisticService;
 
 
-    @RequestMapping(value="/api/v1/logins/{year}", produces = "application/json")
+    @GetMapping(value="/logins", produces = "application/json")
     @ResponseBody
-    public ResponseEntity<YearCountDto> getYearLoginCount(@PathVariable("year") String year){
-
-        return ResponseEntity.ok(statisticService.getYearLogins(year));
+    public ResponseEntity<?> getYearLoginCount(@RequestParam("year") String year) {
+        try {
+            YearCountDto result = statisticService.getYearLogins(year);
+            return ResponseEntity.ok(ApiResponse.success(result, year + "년 로그인 통계 조회 성공!"));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(ApiResponse.fail(e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ApiResponse.fail("서버 오류가 발생했습니다."));
+        }
     }
 
     @RequestMapping(value="/api/v1/logins/{year}/{month}", produces = "application/json")
