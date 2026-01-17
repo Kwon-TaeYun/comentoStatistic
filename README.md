@@ -39,7 +39,6 @@
   }
 }
 
-
 ### ❌ 에러 응답
 
 | 코드 | 메시지 | 설명 |
@@ -47,6 +46,7 @@
 | 400 | year는 2자리 숫자여야 합니다. | year 파라미터 형식이 잘못된 경우 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 
+---
 
 ## 작성 문서
 - Word:: [API문서_코멘토_권태윤_260103.docx](https://github.com/user-attachments/files/24415496/API._._._260103.docx) 
