@@ -141,6 +141,34 @@
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 ---
 
+## 📌 4. 전체 접속자 수(로그인 수) 조회
+
+### 🔹 [GET] `/api/v1/logins` - 전체 접속자 수(로그인 수) 조회
+
+**설명**:
+
+전체 서비스 접속자 수(로그인 수)를 조회하는 API
+
+
+### ✅ 요청 정보
+
+- **Method**: `GET`
+- **URL**: `http://localhost:8031/api/v1/logins`
+- **Headers**: 없음.
+- **Form Data**: 없음.
+
+### 📥 응답 예시 (`200 OK`)
+
+```json
+{
+  "success": true,
+  "message": "전체 로그인 통계 조회 성공!",
+  "data": {
+    "totCnt": 14
+  }
+}
+
+```
 
 ## 작성 문서
 - Word:: [API문서_코멘토_권태윤_260103.docx](https://github.com/user-attachments/files/24415496/API._._._260103.docx) 
@@ -164,6 +192,9 @@
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/07ebbb8c-1b68-411e-bb9f-fd3fd5670516" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/d85e7307-b2c6-4fe0-98ce-ff4c1be57fc4" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/b8748e49-3ac7-4e5e-9ca0-fb37bcf3df9f" />
+
+## 📌 4. 전체 접속자 수(로그인 수) 조회
+<img  width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/4fb8d331-55c2-42e7-9164-437a8cb3f2de" />
 
 ---
 
