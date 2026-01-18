@@ -29,7 +29,7 @@ public class StatisticService {
     }
 
     public YearMonthCountDto getYearMonthLogins(String year, String month){
-        if (!year.matches("\\d{2}|\\d{4}")) {
+        if (!year.matches("\\d{2}")) {
             throw new IllegalArgumentException("year 형식이 올바르지 않습니다.");
         }
 
@@ -46,7 +46,24 @@ public class StatisticService {
     }
 
     public YearMonthDayCountDto getYearMonthDayLogins(String year, String month, String day){
-        return statisticMapper.selectYearMonthDayLogin(year+month+day);
+        if (!year.matches("\\d{2}")) {
+            throw new IllegalArgumentException("year 형식이 올바르지 않습니다.");
+        }
+
+        if (!month.matches("0[1-9]|1[0-2]")) {
+            throw new IllegalArgumentException("month는 01~12 사이여야 합니다.");
+        }
+
+        if (!day.matches("0[1-9]|1[0-9]|2[0-9]|3[0-1]")) {
+            throw new IllegalArgumentException("day는 01~31 사이여야 합니다.");
+        }
+
+        YearMonthDayCountDto result = statisticMapper.selectYearMonthDayLogin(year + month + day);
+        if (result == null || result.getTotCnt() == 0) {
+            throw new IllegalArgumentException(year + "년 " + month + "월 " + day + "일의 로그인 데이터가 없습니다.");
+        }
+
+        return result;
     }
 
     public LoginCountDto getAllLogins(){

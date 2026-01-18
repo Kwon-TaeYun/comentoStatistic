@@ -50,21 +50,36 @@ public class StatisticController {
     @GetMapping(value = "/logins", produces = "application/json")
     public ResponseEntity<?> getLoginCount(
             @RequestParam("year") String year,
-            @RequestParam(value = "month", required = false) String month
+            @RequestParam(value = "month", required = false) String month,
+            @RequestParam(value = "day", required = false) String day
     ) {
         try {
-            // month가 없으면 연도별
-            if (month == null) {
-                YearCountDto result = statisticService.getYearLogins(year);
+
+            // year + month + day
+            if (month != null && day != null) {
+                YearMonthDayCountDto result =
+                        statisticService.getYearMonthDayLogins(year, month, day);
                 return ResponseEntity.ok(
-                        ApiResponse.success(result, year + "년 로그인 통계 조회 성공!")
+                        ApiResponse.success(result,
+                                year + "년 " + month + "월 " + day + "일 로그인 통계 조회 성공!")
                 );
             }
 
-            // month가 있으면 연+월별
-            YearMonthCountDto result = statisticService.getYearMonthLogins(year, month);
+            // year + month
+            if (month != null) {
+                YearMonthCountDto result =
+                        statisticService.getYearMonthLogins(year, month);
+                return ResponseEntity.ok(
+                        ApiResponse.success(result,
+                                year + "년 " + month + "월 로그인 통계 조회 성공!")
+                );
+            }
+
+            // year only
+            YearCountDto result = statisticService.getYearLogins(year);
             return ResponseEntity.ok(
-                    ApiResponse.success(result, year + "년 " + month + "월 로그인 통계 조회 성공!")
+                    ApiResponse.success(result,
+                            year + "년 로그인 통계 조회 성공!")
             );
 
         } catch (IllegalArgumentException e) {
@@ -73,13 +88,6 @@ public class StatisticController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(ApiResponse.fail("서버 오류가 발생했습니다."));
         }
-    }
-
-    @RequestMapping(value="/api/v1/logins/{year}/{month}/{day}", produces = "application/json")
-    @ResponseBody
-    public Object getYearMonthDayLoginCount(@PathVariable("year") String year, @PathVariable("month") String month, @PathVariable("day") String day){
-
-        return ResponseEntity.ok(statisticService.getYearMonthDayLogins(year, month, day));
     }
 
     @RequestMapping(value="/api/v1/logins", produces = "application/json")
