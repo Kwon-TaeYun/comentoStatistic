@@ -25,7 +25,14 @@
         where left(ri.create_date, 6) = #{yearMonthDay} and request_code = 'L';
     </select>
 
-    <!-- 4. 평균 하루 접속사 수 조회  -->
+    <!-- 4. 접속사 수 조회 -->
+    <select id="selectAllLogin" parameterType="string" resultType="LoginCountDto">
+        select count(*) as totCnt
+        from statistic.request_info ri
+        where request_code = 'L';
+    </select>
+
+    <!-- 5. 평균 하루 접속사 수 조회  -->
     <select id="selectAvgDailyLogin" resultType="double">
         SELECT AVG(daily_cnt)
         FROM (
@@ -37,7 +44,8 @@
         GROUP BY SUBSTRING(create_date, 1, 6)
         ) t
     </select>
-    <!-- 5. 휴일을 제외한 로그인 접속사 수 조회  -->
+
+    <!-- 6. 휴일을 제외한 로그인 접속사 수 조회  -->
     <select id="selectLoginCountExcludeHoliday"
             resultType="com.demo.comentoStatistic.dto.LoginCountDto">
         SELECT COUNT(*) AS totCnt
@@ -48,7 +56,7 @@
         AND h.holiday_date IS NULL
     </select>
 
-    <!-- 6. 부서별 접속자 수 조회 -->
+    <!-- 7. 부서별 접속자 수 조회 -->
     <select id="selectConnectedUserCountByDepartment" parameterType="string"
             resultType="DepartmentUserCountDto">
         SELECT
@@ -62,7 +70,7 @@
         GROUP BY u.hr_organ
     </select>
 
-    <!-- 7. 부서별 월별 접속사 수 조회  -->
+    <!-- 8. 부서별 월별 접속사 수 조회  -->
     <select id="selectDepartmentMonthUserCount"
             parameterType="map"
             resultType="DepartmentMonthUserCountDto">
@@ -77,13 +85,6 @@
         AND u.hr_organ = #{department}
         AND left(ri.create_date, 4) = #{yearMonth}
         GROUP BY u.hr_organ, yearMonth
-    </select>
-
-    <!-- 8. 접속사 수 조회 -->
-    <select id="selectAllLogin" parameterType="string" resultType="LoginCountDto">
-        select count(*) as totCnt
-        from statistic.request_info ri
-        where request_code = 'L';
     </select>
 
     <!-- 9. 해당 날짜 로그인 요청 수 조회  -->

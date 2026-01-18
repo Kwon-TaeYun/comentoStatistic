@@ -49,13 +49,21 @@ public class StatisticController {
 
     @GetMapping(value = "/logins", produces = "application/json")
     public ResponseEntity<?> getLoginCount(
-            @RequestParam("year") String year,
+            @RequestParam(value = "year", required = false) String year,
             @RequestParam(value = "month", required = false) String month,
             @RequestParam(value = "day", required = false) String day
     ) {
         try {
 
-            // year + month + day
+            // 🔹 조건 없음 → 전체 조회
+            if (year == null) {
+                LoginCountDto result = statisticService.getAllLogins();
+                return ResponseEntity.ok(
+                        ApiResponse.success(result, "전체 로그인 통계 조회 성공!")
+                );
+            }
+
+            // 🔹 year + month + day
             if (month != null && day != null) {
                 YearMonthDayCountDto result =
                         statisticService.getYearMonthDayLogins(year, month, day);
@@ -65,7 +73,7 @@ public class StatisticController {
                 );
             }
 
-            // year + month
+            // 🔹 year + month
             if (month != null) {
                 YearMonthCountDto result =
                         statisticService.getYearMonthLogins(year, month);
@@ -75,7 +83,7 @@ public class StatisticController {
                 );
             }
 
-            // year only
+            // 🔹 year only
             YearCountDto result = statisticService.getYearLogins(year);
             return ResponseEntity.ok(
                     ApiResponse.success(result,
@@ -88,13 +96,6 @@ public class StatisticController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(ApiResponse.fail("서버 오류가 발생했습니다."));
         }
-    }
-
-    @RequestMapping(value="/api/v1/logins", produces = "application/json")
-    @ResponseBody
-    public Object getYearMonthDayLoginCount(){
-
-        return ResponseEntity.ok(statisticService.getAllLogins());
     }
 
     @RequestMapping(value="/api/v1/logins/average", produces = "application/json")
