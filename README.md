@@ -92,8 +92,56 @@
 | 400 | `27년 08월의 로그인 데이터가 없습니다.` | 해당 년도, 월의 로그인 데이터가 없을 경우 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 
+## 📌 3. 일별 접속자 수(로그인 수) 조회
+
+### 🔹 [GET] `/api/v1/logins` - 일별 접속자 수(로그인 수) 조회
+
+**설명**:
+
+특정 일의 서비스 접속자 수(로그인 수)를 조회하는 API
+
+쿼리 파라미터로 “year”과 “month”, “day”를 전달 받는다.
+
+### ✅ 요청 정보
+
+- **Method**: `GET`
+- **URL**: `http://localhost:8031/api/v1/logins`
+- **Headers**: 없음.
+- **Query Parameter**
+
+| 이름 | 값 | 설명 |
+| --- | --- | --- |
+| year | String | 조회할 년도(끝 2자리) |
+| month | String  | 조회할 월 (01 ~ 12) |
+| day | String | 조회할 일 (01 ~ 31) |
+- **Form Data**: 없음.
+
+### 📥 응답 예시 (`200 OK`)
+
+```json
+{
+  "success": true,
+  "message": "24년 09월 04일 로그인 통계 조회 성공!",
+  "data": {
+    "yearMonthDay": "20240904",
+    "totCnt": 1
+  }
+}
+
+```
+
+### ❌ 에러 응답
+
+| 코드 | 메시지 | 설명 |
+| --- | --- | --- |
+| 400 | `year 형식이 올바르지 않습니다.` | year 파라미터 형식이 잘못된 경우 |
+| 400 | `month는 01~12 사이여야 합니다.` | month 파라미터 범위가 잘못된 경우 |
+| 400 | `day는 01~31 사이여야 합니다.` | day 파라미터 범위가 잘못된 경우 |
+| 400 | `24년 09월 31일의 로그인 데이터가 없습니다.` | 해당 년도, 월, 일의 로그인 데이터가 없을 경우 |
+| 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 ---
----
+
+
 ## 작성 문서
 - Word:: [API문서_코멘토_권태윤_260103.docx](https://github.com/user-attachments/files/24415496/API._._._260103.docx) 
 - Notion: https://www.notion.so/API-2dd98cfebe1e80d68de2cbf9e0749274
@@ -111,6 +159,11 @@
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/d399eda7-745a-4f64-b7d6-bacb5b7b51ec" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/200f09ef-be48-4ff6-9393-d0d78f9213e8" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/38c92569-946c-49a8-9b02-5f4cf07c835c" />
+
+## 📌 3. 일별 접속자 수(로그인 수) 조회
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/07ebbb8c-1b68-411e-bb9f-fd3fd5670516" />
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/d85e7307-b2c6-4fe0-98ce-ff4c1be57fc4" />
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/b8748e49-3ac7-4e5e-9ca0-fb37bcf3df9f" />
 
 ---
 
