@@ -49,18 +49,22 @@
     <!-- 6. 부서별 월별 접속사 수 조회  -->
     <select id="selectDepartmentMonthUserCount"
             parameterType="map"
-            resultType="DepartmentMonthUserCountDto">
+            resultType="com.demo.comentoStatistic.dto.DepartmentMonthUserCountDto">
+
         SELECT
         u.hr_organ AS department,
-        concat('20', #{yearMonth}) as yearMonth,
-        COUNT(DISTINCT u.user_id) AS connectedUserCount
-        FROM statistic.request_info ri
-        JOIN statistic.user u
+        #{year} AS year,
+        #{month} AS month,
+        COUNT(DISTINCT ri.user_id) AS connectedUserCount
+        FROM statistic.user u
+        LEFT JOIN statistic.request_info ri
         ON ri.user_id = u.user_id
-        WHERE ri.request_code = 'L'
-        AND u.hr_organ = #{department}
-        AND left(ri.create_date, 4) = #{yearMonth}
-        GROUP BY u.hr_organ, yearMonth
+        AND ri.request_code = 'L'
+        AND LEFT(ri.create_date, 2) = #{year}
+        AND SUBSTRING(ri.create_date, 3, 2) = #{month}
+        WHERE u.hr_organ = #{department}
+        GROUP BY u.hr_organ
+
     </select>
 
     <!-- 7. 평균 하루 접속사 수 조회  -->

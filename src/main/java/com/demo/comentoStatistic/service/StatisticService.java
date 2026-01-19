@@ -82,14 +82,29 @@ public class StatisticService {
         return statisticMapper.selectYearMonthDayLoginRequest(year+month+day);
     }
 
+    private void validateDepartmentExist(Object dto) {
+        if (dto == null) {
+            throw new IllegalArgumentException("존재하지 않는 부서입니다.");
+        }
+    }
+
+    private void validateYearMonthFormat(String year, String month) {
+
+        if (!year.matches("\\d{2}")) {
+            throw new IllegalArgumentException("year는 2자리 숫자여야 합니다.");
+        }
+
+        if (!month.matches("0[1-9]|1[0-2]")) {
+            throw new IllegalArgumentException("month는 01~12 사이여야 합니다.");
+        }
+    }
+
     public DepartmentUserCountDto getLoginByDepartment(String department) {
 
         DepartmentUserCountDto dto =
                 statisticMapper.selectConnectedUserCountByDepartment(department);
 
-        if (dto == null) {
-            throw new IllegalArgumentException("존재하지 않는 부서입니다.");
-        }
+        validateDepartmentExist(dto);
 
         if (dto.getConnectedUserCount() == 0) {
             throw new IllegalArgumentException("해당 부서의 접속자 수가 없습니다.");
@@ -98,18 +113,34 @@ public class StatisticService {
         return dto;
     }
 
+    /**
+     * 부서별 월별 로그인 사용자 수 조회
+     */
     public DepartmentMonthUserCountDto getDepartmentMonthUserCount(
             String department, String year, String month) {
 
-         // "2024","08" -> "2408"
-        DepartmentMonthUserCountDto dto =
-                statisticMapper.selectDepartmentMonthUserCount(department, year+month);
+        // 1️⃣ 날짜 형식 오류
+        if (!year.matches("\\d{2}")) {
+            throw new IllegalArgumentException("year는 2자리 숫자여야 합니다.");
+        }
 
+        if (!month.matches("0[1-9]|1[0-2]")) {
+            throw new IllegalArgumentException("month는 01~12 사이여야 합니다.");
+        }
+
+        DepartmentMonthUserCountDto dto =
+                statisticMapper.selectDepartmentMonthUserCount(
+                        department, year, month
+                );
+
+        // 2️⃣ 부서 자체가 없는 경우
         if (dto == null) {
-            dto = new DepartmentMonthUserCountDto();
-            dto.setDepartment(department);
-            dto.setYearMonth(year+month);
-            dto.setConnectedUserCount(0);
+            throw new IllegalArgumentException("존재하지 않는 부서입니다.");
+        }
+
+        // 3️⃣ 로그인 데이터가 없는 경우
+        if (dto.getConnectedUserCount() == 0) {
+            throw new IllegalArgumentException("해당 부서의 로그인 데이터가 없습니다.");
         }
 
         return dto;

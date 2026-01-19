@@ -101,19 +101,42 @@ public class StatisticController {
     @GetMapping(value = "/logins/departments",
             produces = "application/json")
     @ResponseBody
-    public ResponseEntity<?> getByDepartmentLogin(
-            @RequestParam(value = "department") String department) {
-
+    public ResponseEntity<?> getDepartmentLogin(
+            @RequestParam String department,
+            @RequestParam(required = false) String year,
+            @RequestParam(required = false) String month
+    ) {
         try {
-            // 한글 부서명 디코딩
-            String decodedDept =
-                    URLDecoder.decode(department, StandardCharsets.UTF_8);
 
-            DepartmentUserCountDto dto =
-                    statisticService.getLoginByDepartment(decodedDept);
+            // department만 있는 경우
+            if (year == null && month == null) {
+                DepartmentUserCountDto dto =
+                        statisticService.getLoginByDepartment(department);
 
-            return ResponseEntity.ok(
-                    ApiResponse.success(dto, "부서별 접속자 수 조회 성공")
+                return ResponseEntity.ok(
+                        ApiResponse.success(dto, "부서별 접속자 수 조회 성공")
+                );
+            }
+
+            // year + month 둘 다 있어야 함
+            if (year != null && month != null) {
+                DepartmentMonthUserCountDto dto =
+                        statisticService.getDepartmentMonthUserCount(
+                                department, year, month
+                        );
+
+                return ResponseEntity.ok(
+                        ApiResponse.success(
+                                dto,
+                                year + "년 " + month + "월 "
+                                        + department + " 부서 로그인 통계 조회 성공"
+                        )
+                );
+            }
+
+            // year만 있거나 month만 있는 경우
+            throw new IllegalArgumentException(
+                    "year와 month는 함께 전달되어야 합니다."
             );
 
         } catch (IllegalArgumentException e) {
@@ -124,22 +147,6 @@ public class StatisticController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(ApiResponse.fail("서버 오류가 발생했습니다."));
         }
-    }
-
-    @RequestMapping(value="/api/v1/logins/{year}/{month}/departments/{department}", produces = "application/json")
-    @ResponseBody
-    public ResponseEntity<DepartmentMonthUserCountDto> getDepartmentMonthLogin(
-            @PathVariable String year,
-            @PathVariable String month,
-            @PathVariable String department) {
-
-        // 한글 디코딩
-        String decodedDept = URLDecoder.decode(department, StandardCharsets.UTF_8);
-
-        DepartmentMonthUserCountDto dto =
-                statisticService.getDepartmentMonthUserCount(decodedDept, year, month);
-
-        return ResponseEntity.ok(dto);
     }
 
 

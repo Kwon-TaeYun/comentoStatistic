@@ -18,9 +18,11 @@ public interface StatisticMapper {
     DepartmentUserCountDto selectConnectedUserCountByDepartment(
             @Param("department") String department
     );
+
     DepartmentMonthUserCountDto selectDepartmentMonthUserCount(
             @Param("department") String department,
-            String yearMonth
+            @Param("year") String year,
+            @Param("month") String month
     );
     int selectBoardCountByUserId(@Param("userId") String userId);
 
