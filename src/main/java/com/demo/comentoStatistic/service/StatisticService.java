@@ -83,7 +83,19 @@ public class StatisticService {
     }
 
     public DepartmentUserCountDto getLoginByDepartment(String department) {
-        return statisticMapper.selectConnectedUserCountByDepartment(department);
+
+        DepartmentUserCountDto dto =
+                statisticMapper.selectConnectedUserCountByDepartment(department);
+
+        if (dto == null) {
+            throw new IllegalArgumentException("존재하지 않는 부서입니다.");
+        }
+
+        if (dto.getConnectedUserCount() == 0) {
+            throw new IllegalArgumentException("해당 부서의 접속자 수가 없습니다.");
+        }
+
+        return dto;
     }
 
     public DepartmentMonthUserCountDto getDepartmentMonthUserCount(

@@ -98,6 +98,51 @@ public class StatisticController {
         }
     }
 
+    @GetMapping(value = "/logins/departments",
+            produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<?> getByDepartmentLogin(
+            @RequestParam(value = "department") String department) {
+
+        try {
+            // 한글 부서명 디코딩
+            String decodedDept =
+                    URLDecoder.decode(department, StandardCharsets.UTF_8);
+
+            DepartmentUserCountDto dto =
+                    statisticService.getLoginByDepartment(decodedDept);
+
+            return ResponseEntity.ok(
+                    ApiResponse.success(dto, "부서별 접속자 수 조회 성공")
+            );
+
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest()
+                    .body(ApiResponse.fail(e.getMessage()));
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ApiResponse.fail("서버 오류가 발생했습니다."));
+        }
+    }
+
+    @RequestMapping(value="/api/v1/logins/{year}/{month}/departments/{department}", produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<DepartmentMonthUserCountDto> getDepartmentMonthLogin(
+            @PathVariable String year,
+            @PathVariable String month,
+            @PathVariable String department) {
+
+        // 한글 디코딩
+        String decodedDept = URLDecoder.decode(department, StandardCharsets.UTF_8);
+
+        DepartmentMonthUserCountDto dto =
+                statisticService.getDepartmentMonthUserCount(decodedDept, year, month);
+
+        return ResponseEntity.ok(dto);
+    }
+
+
     @RequestMapping(value="/api/v1/logins/average", produces = "application/json")
     @ResponseBody
     public Object getAverageDailyLoginCount(){
@@ -117,42 +162,6 @@ public class StatisticController {
     public Object getYearMonthDayLoginRequestCount(@PathVariable("year") String year, @PathVariable("month") String month, @PathVariable("day") String day){
 
         return ResponseEntity.ok(statisticService.getYearMonthDayLoginRequests(year, month, day));
-    }
-
-    @RequestMapping(value="/api/v1/logins/departments/{department}", produces = "application/json")
-    @ResponseBody
-    public ResponseEntity<DepartmentUserCountDto> getByDepartmentLogin(
-            @PathVariable String department) {
-
-        // URL 디코딩으로 한글 깨짐 방지
-        String decodedDept = URLDecoder.decode(department, StandardCharsets.UTF_8);
-
-        DepartmentUserCountDto dto = statisticService.getLoginByDepartment(decodedDept);
-
-        if (dto == null) {
-            // 조회 결과 없으면 빈 DTO 반환
-            dto = new DepartmentUserCountDto();
-            dto.setDepartment(decodedDept);
-            dto.setConnectedUserCount(0);
-        }
-
-        return ResponseEntity.ok(dto);
-    }
-
-    @RequestMapping(value="/api/v1/logins/{year}/{month}/departments/{department}", produces = "application/json")
-    @ResponseBody
-    public ResponseEntity<DepartmentMonthUserCountDto> getDepartmentMonthLogin(
-            @PathVariable String year,
-            @PathVariable String month,
-            @PathVariable String department) {
-
-        // 한글 디코딩
-        String decodedDept = URLDecoder.decode(department, StandardCharsets.UTF_8);
-
-        DepartmentMonthUserCountDto dto =
-                statisticService.getDepartmentMonthUserCount(decodedDept, year, month);
-
-        return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/api/v1/boards/users/{userId}")
