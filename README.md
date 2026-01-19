@@ -211,6 +211,52 @@
 | 400 | `해당 부서의 접속자 수가 없습니다.` | 해당 부서의 접속자 수가 없을 때 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 
+## 📌 6. 부서 별 월 별 접속자 수 조회
+
+### 🔹 [GET] `/api/v1/logins/departments` - 부서 별, 월 별 접속자 수 조회
+
+**설명**:
+
+부서 별 그리고 월 별로 해당 서비스에 접속한 수를 조회하는 API
+
+### ✅ 요청 정보
+
+- **Method**: `GET`
+- **URL**: `http://localhost:8031/api/v1/logins/departments`
+- **Headers**: 없음.
+- **Query Parameter**
+
+| 이름 | 값 | 설명 |
+| --- | --- | --- |
+| department | String | 부서 |
+| year | String | 조회할 년도(끝 2자리) |
+| month | String | 조회할 월 (01~12) |
+- **Form Data**: 없음.
+
+### 📥 응답 예시 (`200 OK`)
+
+```json
+{
+  "success": true,
+  "message": "24년 08월 개발팀 부서 로그인 통계 조회 성공",
+  "data": {
+    "department": "개발팀",
+    "year": "24",
+    "month": "08",
+    "connectedUserCount": 1
+  }
+}
+
+```
+### ❌ 에러 응답
+
+| 코드 | 메시지 | 설명 |
+| --- | --- | --- |
+| 400 | `존재하지 않는 부서입니다.` | 존재하지 않는 부서명 일 때 |
+| 400 | `해당 부서의 접속자 수가 없습니다.` | 해당 년도/월에 대한 부서의 접속자 수가 없을 때 |
+| 400 | `year는 2자리 숫자여야 합니다.` | year 파라미터 형식이 잘못된 경우 |
+| 400 | `month는 01~12 사이여야 합니다.` | month 파라미터 형식이 잘못된 경우 |
+| 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 ---
 ## 작성 문서
 - Word:: [API문서_코멘토_권태윤_260103.docx](https://github.com/user-attachments/files/24415496/API._._._260103.docx) 
@@ -242,6 +288,13 @@
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/e6c467b6-57c9-4813-9103-dd2b4dc52436" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/d600a107-ace8-45ee-a340-86f9c8aed79c" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/2e2c3614-1933-43f6-8f40-073e7d282ac9" />
+
+## 📌 6. 부서별 월 별 접속자 수(로그인 수) 조회
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/28303df7-f1b1-4fc9-9d0e-61cd915042ee" />
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/23f3c193-1724-4561-ae98-f20f2dbab47e" />
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/e8204030-3c48-4750-9b62-8e518f34aacd" />
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/86ecabfa-49d6-4b3a-8fb2-6301b1b62902" />
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/18e0613d-e56e-47d2-998d-c7e7f144a4eb" />
 
 
 ---
