@@ -141,12 +141,82 @@
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 ---
 
+## 📌 4. 전체 접속자 수(로그인 수) 조회
 
+### 🔹 [GET] `/api/v1/logins` - 전체 접속자 수(로그인 수) 조회
+
+**설명**:
+
+전체 서비스 접속자 수(로그인 수)를 조회하는 API
+
+
+### ✅ 요청 정보
+
+- **Method**: `GET`
+- **URL**: `http://localhost:8031/api/v1/logins`
+- **Headers**: 없음.
+- **Form Data**: 없음.
+
+### 📥 응답 예시 (`200 OK`)
+
+```json
+{
+  "success": true,
+  "message": "전체 로그인 통계 조회 성공!",
+  "data": {
+    "totCnt": 14
+  }
+}
+
+```
+
+## 📌 5. 부서 별 접속자 수 조회
+
+### 🔹 [GET] `/api/v1/logins/departments` - 부서 별 접속자 수 조회
+
+**설명**:
+
+부서 별로 해당 서비스에 접속한 수를 조회하는 API
+
+### ✅ 요청 정보
+
+- **Method**: `GET`
+- **URL**: `http://localhost:8031/api/v1/logins/departments`
+- **Headers**: 없음.
+- **Query Parameter**
+
+| 이름 | 값 | 설명 |
+| --- | --- | --- |
+| department | String | 부서 |
+- **Form Data**: 없음.
+
+### 📥 응답 예시 (`200 OK`)
+
+```json
+{
+  "success": true,
+  "message": "부서별 접속자 수 조회 성공",
+  "data": {
+    "department": "개발팀",
+    "connectedUserCount": 2
+  }
+}
+
+```
+### ❌ 에러 응답
+
+| 코드 | 메시지 | 설명 |
+| --- | --- | --- |
+| 400 | `존재하지 않는 부서입니다."` | 존재하지 않는 부서명 일 때 |
+| 400 | `해당 부서의 접속자 수가 없습니다.` | 해당 부서의 접속자 수가 없을 때 |
+| 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
+
+---
 ## 작성 문서
 - Word:: [API문서_코멘토_권태윤_260103.docx](https://github.com/user-attachments/files/24415496/API._._._260103.docx) 
 - Notion: https://www.notion.so/API-2dd98cfebe1e80d68de2cbf9e0749274
 
-
+---
 
 # 2. 실행 화면
 
@@ -164,6 +234,15 @@
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/07ebbb8c-1b68-411e-bb9f-fd3fd5670516" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/d85e7307-b2c6-4fe0-98ce-ff4c1be57fc4" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/b8748e49-3ac7-4e5e-9ca0-fb37bcf3df9f" />
+
+## 📌 4. 전체 접속자 수(로그인 수) 조회
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/4fb8d331-55c2-42e7-9164-437a8cb3f2de" />
+
+## 📌 5. 부서별 접속자 수(로그인 수) 조회
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/e6c467b6-57c9-4813-9103-dd2b4dc52436" />
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/d600a107-ace8-45ee-a340-86f9c8aed79c" />
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/2e2c3614-1933-43f6-8f40-073e7d282ac9" />
+
 
 ---
 
