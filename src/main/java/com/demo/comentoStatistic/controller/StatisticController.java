@@ -150,11 +150,21 @@ public class StatisticController {
     }
 
 
-    @RequestMapping(value="/api/v1/logins/average", produces = "application/json")
+    @GetMapping(value = "/logins/statistic/daily-average",
+            produces = "application/json")
     @ResponseBody
-    public Object getAverageDailyLoginCount(){
-
-        return ResponseEntity.ok(statisticService.getAvgDailyLogin());
+    public ResponseEntity<?> getAverageDailyLoginCount() {
+        try {
+            return ResponseEntity.ok(
+                    ApiResponse.success(
+                            statisticService.getAvgDailyLogin(),
+                            "일 평균 로그인 수 조회 성공"
+                    )
+            );
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ApiResponse.fail("서버 오류가 발생했습니다."));
+        }
     }
 
     @RequestMapping(value="/api/v1/requests", produces = "application/json")

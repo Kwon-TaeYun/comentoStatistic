@@ -68,16 +68,17 @@
     </select>
 
     <!-- 7. 평균 하루 접속사 수 조회  -->
-    <select id="selectAvgDailyLogin" resultType="double">
-        SELECT AVG(daily_cnt)
-        FROM (
+    <select id="selectAvgDailyLogin"
+            resultType="com.demo.comentoStatistic.dto.AverageDailyLoginCountDto">
+
         SELECT
-        SUBSTRING(create_date, 1, 6) AS day,
-        COUNT(*) AS daily_cnt
-        FROM statistic.request_info ri
+        ROUND(
+        COUNT(*) / COUNT(DISTINCT LEFT(create_date, 6)),
+        2
+        ) AS averageDailyLoginCount
+        FROM statistic.request_info
         WHERE request_code = 'L'
-        GROUP BY SUBSTRING(create_date, 1, 6)
-        ) t
+
     </select>
 
     <!-- 8. 휴일을 제외한 로그인 접속사 수 조회  -->

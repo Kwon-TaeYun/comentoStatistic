@@ -12,7 +12,7 @@ public interface StatisticMapper {
     YearMonthCountDto selectYearMonthLogin(String yearMonth);
     YearMonthDayCountDto selectYearMonthDayLogin(String yearMonthDay);
     LoginCountDto selectAllLogin();
-    double selectAvgDailyLogin();
+    AverageDailyLoginCountDto selectAvgDailyLogin();
     LoginRequestCountDto selectAllLoginRequest();
     LoginRequestDayCountDto selectYearMonthDayLoginRequest(String yearMonthDay);
     DepartmentUserCountDto selectConnectedUserCountByDepartment(

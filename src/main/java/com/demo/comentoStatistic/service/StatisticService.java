@@ -70,8 +70,18 @@ public class StatisticService {
         return statisticMapper.selectAllLogin();
     }
 
-    public double getAvgDailyLogin() {
-        return statisticMapper.selectAvgDailyLogin();
+    public AverageDailyLoginCountDto getAvgDailyLogin() {
+
+        AverageDailyLoginCountDto dto =
+                statisticMapper.selectAvgDailyLogin();
+
+        // 통계용이므로 null이면 0 처리 (에러 X)
+        if (dto == null) {
+            dto = new AverageDailyLoginCountDto();
+            dto.setAverageDailyLoginCount(0.0);
+        }
+
+        return dto;
     }
 
     public LoginRequestCountDto getLoginRequests(){
