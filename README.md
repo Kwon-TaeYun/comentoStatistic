@@ -257,7 +257,41 @@
 | 400 | `year는 2자리 숫자여야 합니다.` | year 파라미터 형식이 잘못된 경우 |
 | 400 | `month는 01~12 사이여야 합니다.` | month 파라미터 형식이 잘못된 경우 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
+
+## 📌 7. 평균 하루 접속자 수 조회
+
+### 🔹 [GET] `/api/v1/logins/statistic/daily-average` - 평균 하루 접속자 수 조회
+
+**설명**:
+
+하루 해당 서비스에 접속한 수를 평균을 구해 보여주는 API
+
+### ✅ 요청 정보
+
+- **Method**: `GET`
+- **URL**: `http://localhost:8031/api/v1/logins/statistic/daily-average`
+- **Headers**: 없음.
+- **Form Data**: 없음.
+
+### 📥 응답 예시 (`200 OK`)
+
+```java
+{
+  "success": true,
+  "message": "일 평균 로그인 수 조회 성공",
+  "data": {
+    "averageDailyLoginCount": 1.08
+  }
+}
+```
+
+### ❌ 에러 응답
+
+| 코드 | 메시지 | 설명 |
+| --- | --- | --- |
+| 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 ---
+
 ## 작성 문서
 - Word:: [API문서_코멘토_권태윤_260103.docx](https://github.com/user-attachments/files/24415496/API._._._260103.docx) 
 - Notion: https://www.notion.so/API-2dd98cfebe1e80d68de2cbf9e0749274
@@ -296,6 +330,8 @@
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/86ecabfa-49d6-4b3a-8fb2-6301b1b62902" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/18e0613d-e56e-47d2-998d-c7e7f144a4eb" />
 
+## 📌 7. 평균 하루 접속자 수 조회
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/f2518bca-b7d5-4314-903f-8aa2bcaacae2" />
 
 ---
 
