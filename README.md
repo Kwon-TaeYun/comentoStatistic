@@ -139,7 +139,6 @@
 | 400 | `day는 01~31 사이여야 합니다.` | day 파라미터 범위가 잘못된 경우 |
 | 400 | `24년 09월 31일의 로그인 데이터가 없습니다.` | 해당 년도, 월, 일의 로그인 데이터가 없을 경우 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
----
 
 ## 📌 4. 전체 접속자 수(로그인 수) 조회
 
@@ -290,6 +289,36 @@
 | 코드 | 메시지 | 설명 |
 | --- | --- | --- |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
+
+## 📌 8. 휴일 제외 접속자 수 조회
+
+### 🔹 [GET] `/api/v1/logins/statistic/exclude-holidays` - 휴일 제외 접속자 수 조회
+
+휴일을 제외한 해당 서비스에 접속한 수를 보여주는 API
+
+### ✅ 요청 정보
+
+- **Method**: `GET`
+- **URL**: `http://localhost:8031/api/v1/logins/statistic/exclude-holidays`
+- **Headers**: 없음.
+- **Form Data**: 없음.
+
+### 📥 응답 예시 (`200 OK`)
+
+```java
+{
+  "success": true,
+  "message": "휴일 제외 로그인 수 조회 성공",
+  "data": {
+    "totCnt": 13
+  }
+}
+```
+### ❌ 에러 응답
+
+| 코드 | 메시지 | 설명 |
+| --- | --- | --- |
+| 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 ---
 
 ## 작성 문서
@@ -330,8 +359,12 @@
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/86ecabfa-49d6-4b3a-8fb2-6301b1b62902" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/18e0613d-e56e-47d2-998d-c7e7f144a4eb" />
 
-## 📌 7. 평균 하루 접속자 수 조회
+## 📌 7. 평균 하루 접속자 수(로그인 수) 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/f2518bca-b7d5-4314-903f-8aa2bcaacae2" />
+
+## 📌 8. 휴일 제외 접속자 수(로그인 수) 조회
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/731a3fbc-32f9-4dc9-a44c-42f29175cf7a" />
+<img width="496" height="440" alt="image" src="https://github.com/user-attachments/assets/db62696a-585f-4f7e-84fd-d19b3ace5986" />
 
 ---
 
