@@ -167,6 +167,23 @@ public class StatisticController {
         }
     }
 
+    @GetMapping(value = "/logins/statistic/exclude-holidays",
+            produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<?> getLoginExcludeHoliday() {
+        try {
+            return ResponseEntity.ok(
+                    ApiResponse.success(
+                            statisticService.getLoginCountExcludeHoliday(),
+                            "휴일 제외 로그인 수 조회 성공"
+                    )
+            );
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ApiResponse.fail("서버 오류가 발생했습니다."));
+        }
+    }
+
     @RequestMapping(value="/api/v1/requests", produces = "application/json")
     @ResponseBody
     public Object getLoginRequestCount(){
@@ -190,8 +207,4 @@ public class StatisticController {
         );
     }
 
-    @GetMapping("/api/v1/logins/exclude-holidays")
-    public LoginCountDto getLoginExcludeHoliday() {
-        return statisticService.getLoginCountExcludeHoliday();
-    }
 }

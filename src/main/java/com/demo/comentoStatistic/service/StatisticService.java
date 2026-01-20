@@ -169,7 +169,17 @@ public class StatisticService {
     }
 
     public LoginCountDto getLoginCountExcludeHoliday() {
-        return statisticMapper.selectLoginCountExcludeHoliday();
+
+        LoginCountDto dto =
+                statisticMapper.selectLoginCountExcludeHoliday();
+
+        // 통계 API → null 방어만
+        if (dto == null) {
+            dto = new LoginCountDto();
+            dto.setTotCnt(0);
+        }
+
+        return dto;
     }
 
 

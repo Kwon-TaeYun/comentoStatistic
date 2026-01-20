@@ -10,4 +10,8 @@ public class LoginCountDto {
     public Integer getTotCnt() {
         return totCnt;
     }
+
+    public void setTotCnt(int totCnt){
+        this.totCnt = totCnt;
+    }
 }
