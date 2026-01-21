@@ -184,28 +184,48 @@ public class StatisticController {
         }
     }
 
-    @GetMapping(value = "/requests",
-            produces = "application/json")
+    @GetMapping(value = "/requests", produces = "application/json")
     @ResponseBody
-    public ResponseEntity<?> getLoginRequestCount() {
+    public ResponseEntity<?> getLoginRequestCount(
+            @RequestParam(required = false) String year,
+            @RequestParam(required = false) String month,
+            @RequestParam(required = false) String day
+    ) {
         try {
-            return ResponseEntity.ok(
-                    ApiResponse.success(
-                            statisticService.getLoginRequests(),
-                            "전체 로그인 요청 수 조회 성공"
-                    )
+
+            // 1️⃣ 날짜 파라미터 없음 → 전체 로그인 요청 수
+            if (year == null && month == null && day == null) {
+                return ResponseEntity.ok(
+                        ApiResponse.success(
+                                statisticService.getLoginRequests(),
+                                "전체 로그인 요청 수 조회 성공"
+                        )
+                );
+            }
+
+            // 2️⃣ year + month + day 모두 있어야 날짜 조회 가능
+            if (year != null && month != null && day != null) {
+                return ResponseEntity.ok(
+                        ApiResponse.success(
+                                statisticService.getLoginRequestByDay(year, month, day),
+                                year + "년 " + month + "월 " + day + "일 로그인 요청 수 조회 성공"
+                        )
+                );
+            }
+
+            // 3️⃣ 일부만 전달된 경우
+            throw new IllegalArgumentException(
+                    "year, month, day는 함께 전달되어야 합니다."
             );
+
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest()
+                    .body(ApiResponse.fail(e.getMessage()));
+
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(ApiResponse.fail("서버 오류가 발생했습니다."));
         }
-    }
-
-    @RequestMapping(value="/api/v1/requests/{year}/{month}/{day}", produces = "application/json")
-    @ResponseBody
-    public Object getYearMonthDayLoginRequestCount(@PathVariable("year") String year, @PathVariable("month") String month, @PathVariable("day") String day){
-
-        return ResponseEntity.ok(statisticService.getYearMonthDayLoginRequests(year, month, day));
     }
 
     @GetMapping("/api/v1/boards/users/{userId}")

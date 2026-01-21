@@ -98,8 +98,31 @@ public class StatisticService {
         return dto;
     }
 
-    public LoginRequestDayCountDto getYearMonthDayLoginRequests(String year, String month, String day){
-        return statisticMapper.selectYearMonthDayLoginRequest(year+month+day);
+    public LoginRequestDayCountDto getLoginRequestByDay(
+            String year, String month, String day) {
+
+        // 1️⃣ 형식 검증
+        if (!year.matches("\\d{2}")) {
+            throw new IllegalArgumentException("year는 2자리(YY)여야 합니다.");
+        }
+        if (!month.matches("0[1-9]|1[0-2]")) {
+            throw new IllegalArgumentException("month는 01~12 사이여야 합니다.");
+        }
+        if (!day.matches("0[1-9]|[12][0-9]|3[01]")) {
+            throw new IllegalArgumentException("day는 01~31 사이여야 합니다.");
+        }
+
+        String yearMonthDay = year + month + day;
+
+        LoginRequestDayCountDto dto =
+                statisticMapper.selectYearMonthDayLoginRequest(yearMonthDay);
+
+        // 2️⃣ 해당 날짜 로그인 요청 없음
+        if (dto == null) {
+            throw new IllegalArgumentException("해당 날짜의 로그인 요청이 없습니다.");
+        }
+
+        return dto;
     }
 
     private void validateDepartmentExist(Object dto) {

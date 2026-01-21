@@ -102,7 +102,8 @@
     <!-- 10. 해당 날짜 로그인 요청 수 조회  -->
     <select id="selectYearMonthDayLoginRequest"
             parameterType="string"
-            resultType="LoginRequestDayCountDto">
+            resultType="com.demo.comentoStatistic.dto.LoginRequestDayCountDto">
+
         SELECT
         SUBSTRING(create_date, 1, 6) AS yearMonthDay,
         COUNT(*) AS totCnt
@@ -110,6 +111,7 @@
         WHERE request_code = 'LR'
         AND SUBSTRING(create_date, 1, 6) = #{yearMonthDay}
         GROUP BY SUBSTRING(create_date, 1, 6)
+
     </select>
 
     <!-- 11. 게시글 작성 수 조회  -->
