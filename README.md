@@ -319,6 +319,38 @@
 | 코드 | 메시지 | 설명 |
 | --- | --- | --- |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
+
+## 📌 9. 전체 로그인 요청 수 조회
+
+### 🔹 [GET] `/api/v1/requests` - 전체 로그인 요청 수 조회
+
+**설명**:
+
+전체 로그인 요청 수를 조회하는 API
+
+### ✅ 요청 정보
+
+- **Method**: `GET`
+- **URL**: `http://localhost:8031/api/v1/requests
+- **Headers**: 없음.
+- **Form Data**: 없음.
+
+### 📥 응답 예시 (`200 OK`)
+```json
+{
+  "success": true,
+  "message": "전체 로그인 요청 수 조회 성공",
+  "data": {
+    "totCnt": 6
+  }
+}
+```
+
+### ❌ 에러 응답
+
+| 코드 | 메시지 | 설명 |
+| --- | --- | --- |
+| 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 ---
 
 ## 작성 문서
@@ -365,6 +397,9 @@
 ## 📌 8. 휴일 제외 접속자 수(로그인 수) 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/731a3fbc-32f9-4dc9-a44c-42f29175cf7a" />
 <img width="496" height="440" alt="image" src="https://github.com/user-attachments/assets/db62696a-585f-4f7e-84fd-d19b3ace5986" />
+
+## 📌 9. 전체 로그인 요청 수 조회
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/97635a31-2d59-404f-a445-890682309ed2" />
 
 ---
 
