@@ -351,6 +351,54 @@
 | 코드 | 메시지 | 설명 |
 | --- | --- | --- |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
+
+## 📌 10. 해당 날짜 로그인 요청 수 조회
+
+### 🔹 [GET] `/api/v1/requests` - 해당 날짜 로그인 요청 수 조회
+
+**설명**:
+
+해당 날짜 로그인 요청 수를 조회하는 API
+
+
+### ✅ 요청 정보
+
+- **Method**: `GET`
+- **URL**: `http://localhost/comento/logins/count?date={login_date}`
+- **Headers**: 없음.
+- **Form Data**: 없음.
+- **Query Parameter:**
+
+| 이름 | 값 | 설명 |
+| --- | --- | --- |
+| year | String | 조회할 년도(끝 2자리) |
+| month | String  | 조회할 월 (01 ~ 12) |
+| day | String | 조회할 일 (01 ~ 31) |
+
+
+### 📥 응답 예시 (`200 OK`)
+
+```json
+{
+  "success": true,
+  "message": "24년 09월 01일 로그인 요청 수 조회 성공",
+  "data": {
+    "yearMonthDay": "240901",
+    "totCnt": 2
+  }
+}
+```
+
+### ❌ 에러 응답
+
+| 코드 | 메시지 | 설명 |
+| --- | --- | --- |
+| 400 | `year는 2자리(YY)여야 합니다.` | year 파라미터 형식이 잘못된 경우 |
+| 400 | `month는 01~12 사이여야 합니다.` | month 파라미터 범위가 잘못된 경우 |
+| 400 | `day는 01~31 사이여야 합니다.` | day 파라미터 범위가 잘못된 경우 |
+| 400 | `year, month, day는 함께 전달되어야 합니다.` | 해당 년도, 월, 일이 한번에 전달하지 않은 경우 |
+| 400 | `해당 날짜의 로그인 요청이 없습니다.` | 해당 년도, 월, 일의 로그인 데이터가 없을 경우 |
+| 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 ---
 
 ## 작성 문서
@@ -400,6 +448,12 @@
 
 ## 📌 9. 전체 로그인 요청 수 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/97635a31-2d59-404f-a445-890682309ed2" />
+
+## 📌 10. 해당 날짜 로그인 요청 수 조회
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/13dcf3c2-debd-484d-9146-fa740b9e7790" />
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/f42c4da1-4627-45f2-be72-6800a14554a8" />
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/c2cfb946-774d-44fe-8d84-13e57ff36e35" />
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/338ecd3a-6434-4a6d-917d-8cd7e1ea9665" />
 
 ---
 
