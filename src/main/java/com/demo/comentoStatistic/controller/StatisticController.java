@@ -228,13 +228,24 @@ public class StatisticController {
         }
     }
 
-    @GetMapping("/api/v1/boards/users/{userId}")
-    public ResponseEntity<UserBoardSummaryDto> getBoardsByUser(
-            @PathVariable String userId) {
+    @GetMapping("/boards")
+    public ResponseEntity<?> getBoardsByUser(
+            @RequestParam String userId) {
 
-        return ResponseEntity.ok(
-                statisticService.getUserBoardSummary(userId)
-        );
+        try {
+            UserBoardSummaryDto dto =
+                    statisticService.getUserBoardSummary(userId);
+
+            return ResponseEntity.ok(dto);
+
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest()
+                    .body(ApiResponse.fail(e.getMessage()));
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ApiResponse.fail("서버 오류가 발생했습니다."));
+        }
     }
 
 }

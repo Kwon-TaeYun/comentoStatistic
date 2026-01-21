@@ -191,11 +191,23 @@ public class StatisticService {
 
     public UserBoardSummaryDto getUserBoardSummary(String userId) {
 
-        int count = statisticMapper.selectBoardCountByUserId(userId);
-        List<BoardDto> boards = statisticMapper.selectBoardsByUserId(userId);
+        if (userId == null || userId.isBlank()) {
+            throw new IllegalArgumentException("userId는 필수입니다.");
+        }
+
+        int boardCount =
+                statisticMapper.selectBoardCountByUserId(userId);
+
+        if (boardCount == 0) {
+            throw new IllegalArgumentException("해당 사용자가 작성한 게시글이 없습니다.");
+        }
+
+        List<BoardDto> boards =
+                statisticMapper.selectBoardsByUserId(userId);
 
         UserBoardSummaryDto dto = new UserBoardSummaryDto();
-        dto.setPostCount(count);
+        dto.setUserId(userId);
+        dto.setBoardCount(boardCount);
         dto.setBoards(boards);
 
         return dto;
