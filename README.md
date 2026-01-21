@@ -468,8 +468,7 @@
 ---
 
 ## 작성 문서
-- Word:: [API문서_코멘토_권태윤_260103.docx](https://github.com/user-attachments/files/24415496/API._._._260103.docx) 
-- Notion: https://www.notion.so/API-2dd98cfebe1e80d68de2cbf9e0749274
+- Notion: https://www.notion.so/API-2dd98cfebe1e800cb6aee4c130de4303?source=copy_link
 
 ---
 
@@ -520,6 +519,11 @@
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/f42c4da1-4627-45f2-be72-6800a14554a8" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/c2cfb946-774d-44fe-8d84-13e57ff36e35" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/338ecd3a-6434-4a6d-917d-8cd7e1ea9665" />
+
+## 📌 11. 게시글 작성 수 조회
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/cc38d398-6242-481b-a853-2adf4ef23861" />
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/13492e5e-3bc5-40c9-a729-b18b04c5f00d" />
+<img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/61044259-4683-43e4-868c-0af5c387a00b" />
 
 ---
 
