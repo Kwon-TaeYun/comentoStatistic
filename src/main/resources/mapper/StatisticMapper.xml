@@ -92,7 +92,14 @@
         AND h.holiday_date IS NULL
     </select>
 
-    <!-- 9. 해당 날짜 로그인 요청 수 조회  -->
+    <!-- 9. 전체 로그인 요청 수 조회  -->
+    <select id="selectAllLoginRequest" parameterType="string" resultType="LoginRequestCountDto">
+        select count(*) as totCnt
+        from statistic.request_info ri
+        where request_code = 'LR';
+    </select>
+
+    <!-- 10. 해당 날짜 로그인 요청 수 조회  -->
     <select id="selectYearMonthDayLoginRequest"
             parameterType="string"
             resultType="LoginRequestDayCountDto">
@@ -103,14 +110,6 @@
         WHERE request_code = 'LR'
         AND SUBSTRING(create_date, 1, 6) = #{yearMonthDay}
         GROUP BY SUBSTRING(create_date, 1, 6)
-    </select>
-
-
-    <!-- 10. 전체 로그인 요청 수 조회  -->
-    <select id="selectAllLoginRequest" parameterType="string" resultType="LoginRequestCountDto">
-        select count(*) as totCnt
-        from statistic.request_info ri
-        where request_code = 'LR';
     </select>
 
     <!-- 11. 게시글 작성 수 조회  -->

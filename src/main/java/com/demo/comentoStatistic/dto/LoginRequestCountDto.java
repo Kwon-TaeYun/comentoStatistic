@@ -8,7 +8,11 @@ import lombok.Setter;
 public class LoginRequestCountDto {
     private Integer totCnt;
 
-    public Integer getTotCount(){
+    public Integer getTotCnt(){
         return totCnt;
+    }
+
+    public void setTotCnt(Integer totCnt){
+        this.totCnt = totCnt;
     }
 }

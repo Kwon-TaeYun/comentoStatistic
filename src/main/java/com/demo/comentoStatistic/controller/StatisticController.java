@@ -184,11 +184,21 @@ public class StatisticController {
         }
     }
 
-    @RequestMapping(value="/api/v1/requests", produces = "application/json")
+    @GetMapping(value = "/requests",
+            produces = "application/json")
     @ResponseBody
-    public Object getLoginRequestCount(){
-
-        return ResponseEntity.ok(statisticService.getLoginRequests());
+    public ResponseEntity<?> getLoginRequestCount() {
+        try {
+            return ResponseEntity.ok(
+                    ApiResponse.success(
+                            statisticService.getLoginRequests(),
+                            "전체 로그인 요청 수 조회 성공"
+                    )
+            );
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ApiResponse.fail("서버 오류가 발생했습니다."));
+        }
     }
 
     @RequestMapping(value="/api/v1/requests/{year}/{month}/{day}", produces = "application/json")

@@ -84,8 +84,18 @@ public class StatisticService {
         return dto;
     }
 
-    public LoginRequestCountDto getLoginRequests(){
-        return statisticMapper.selectAllLoginRequest();
+    public LoginRequestCountDto getLoginRequests() {
+
+        LoginRequestCountDto dto =
+                statisticMapper.selectAllLoginRequest();
+
+        // 통계 API → null 방어
+        if (dto == null) {
+            dto = new LoginRequestCountDto();
+            dto.setTotCnt(0);
+        }
+
+        return dto;
     }
 
     public LoginRequestDayCountDto getYearMonthDayLoginRequests(String year, String month, String day){
