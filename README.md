@@ -1,12 +1,148 @@
 # ER 다이어그램
 <img width="1052" height="693" alt="image" src="https://github.com/user-attachments/assets/4a06d59f-32b3-4cda-bd2b-5ff68199d7f3" />
 
+
 | **버전** | **변경일** | **변경 사유** | **변경 내역** |
 | --- | --- | --- | --- |
 | 1.0 | 2026-01-03 | 최초 작성 | 최초 작성 |
 | 2.0 | 2026-01-16 | API 명세서 내용 추가 | 변경중 |
 
-# 1. 2차 API 문서 (V2.0)
+# 1. 1차 API 문서
+
+## 📌 1. 접속자 수 조회
+
+### 🔹 [GET] /comento/users - 접속자 수 조회
+
+설명  
+서비스에 접속한 사용자 수를 조회하는 API
+
+요청 정보  
+- Method: GET  
+- URL: http://localhost/comento/users  
+- Headers: 없음  
+- Body: 없음  
+
+응답 예시 (200 OK)  
+{
+  "connectedUserCount": 128
+}
+
+에러 응답  
+- 500 INTERNAL_SERVER_ERROR : 서버 오류
+
+---
+
+## 📌 2. 부서 별 접속자 수 조회
+
+### 🔹 [GET] /comento/users/{department_id} - 부서 별 접속자 수 조회
+
+설명  
+부서별로 해당 서비스에 접속한 사용자 수를 조회하는 API
+
+요청 정보  
+- Method: GET  
+- URL: http://localhost/comento/users/{department_id}  
+- Headers: 없음  
+
+Path Variable  
+- department_id (Integer, 필수): 부서 ID  
+
+응답 예시 (200 OK)  
+{
+  "department": {
+    "id": 3,
+    "name": "Engineering"
+  },
+  "connectedUserCount": 27
+}
+
+에러 응답  
+- 404 : 존재하지 않는 부서입니다.  
+- 500 INTERNAL_SERVER_ERROR : 서버 내부 오류  
+
+---
+
+## 📌 3. 해당 날짜 로그인 요청 수 조회
+
+### 🔹 [GET] /comento/logins/count?date={login_date}
+
+설명  
+특정 날짜의 로그인 요청 수를 조회하는 API
+
+요청 정보  
+- Method: GET  
+- URL: http://localhost/comento/logins/count  
+- Headers: 없음  
+
+Query Parameter  
+- date (String, YYYY-MM-DD, 필수): 조회 날짜  
+
+응답 예시 (200 OK)  
+{
+  "date": "2026-01-03",
+  "loginCount": 342
+}
+
+에러 응답  
+- 400 : 날짜 형식이 올바르지 않습니다.  
+- 500 INTERNAL_SERVER_ERROR : 서버 내부 오류  
+
+---
+
+## 📌 4. 전체 로그인 요청 수 조회
+
+### 🔹 [GET] /comento/logins/count
+
+설명  
+전체 로그인 요청 수를 조회하는 API
+
+요청 정보  
+- Method: GET  
+- URL: http://localhost/comento/logins/count  
+- Headers: 없음  
+
+응답 예시 (200 OK)  
+{
+  "loginCount": 342
+}
+
+에러 응답  
+- 500 INTERNAL_SERVER_ERROR : 서버 내부 오류  
+
+---
+
+## 📌 5. 게시글 작성 수 조회
+
+### 🔹 [GET] /comento/posts/count
+
+설명  
+게시글 작성 수를 조회하는 API
+
+요청 정보  
+- Method: GET  
+- URL: http://localhost/comento/posts/count  
+- Headers: 없음  
+
+응답 예시 (200 OK)  
+{
+  "board": {
+    "id": 3,
+    "title": "자유게시판"
+  },
+  "postCount": 1
+}
+
+에러 응답  
+- 500 INTERNAL_SERVER_ERROR : 서버 내부 오류  
+
+---
+
+## 작성 문서
+- Word:: [API문서_코멘토_권태윤_260103.docx](https://github.com/user-attachments/files/24415496/API._._._260103.docx) 
+- Notion: https://www.notion.so/API-2dd98cfebe1e80d68de2cbf9e0749274  
+
+---
+# 2. 2차 API 문서 (V2.0)
 
 ## 📌 1. 년도 별 접속자 수(로그인 수) 조회
 
@@ -475,7 +611,7 @@
 
 ---
 
-# 2. 실행 화면
+# 3. 실행 화면
 
 ## 📌 1. 년도별 접속자 수(로그인 수) 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/8c5e1a20-df1f-42bc-b879-fd64fc700537" />
@@ -531,9 +667,9 @@
 ---
 
 
-# 3. REST API
+# 4. REST API
 
-## 3-1. HTTP 통신이란?
+## 4-1. HTTP 통신이란?
 
 HTTP(HyperText Transfer Protocol)는 클라이언트(브라우저, 앱)가 서버(웹 서버, API 서버)에 요청(Request)을 보내고 응답(Response)을 받기 위한 통신 규칙(프로토콜)이다.
 
@@ -576,7 +712,7 @@ HTTP vs HTTPS
 - HTTP: 평문 통신, 포트 80  
 - HTTPS: SSL/TLS 암호화, 포트 443  
 
-## 3-2. 브라우저에 URL 입력 후 요청/응답 과정
+## 4-2. 브라우저에 URL 입력 후 요청/응답 과정
 
 1. URL 입력  
 2. DNS 조회 (Domain → IP)  
