@@ -16,4 +16,8 @@ public class YearMonthDayCountDto {
     public Integer getTotCnt() {
         return totCnt;
     }
+
+    public void setTotCnt(int totCnt) {
+        this.totCnt = totCnt;
+    }
 }
