@@ -665,11 +665,14 @@ Query Parameter
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/61044259-4683-43e4-868c-0af5c387a00b" />
 
 ---
+# 4. 트러블 슈팅 (Trouble-Shooting)
+## 4-1. 트러블 슈팅 #1 ()
 
+---
 
-# 4. REST API
+# 5. REST API
 
-## 4-1. HTTP 통신이란?
+## 5-1. HTTP 통신이란?
 
 HTTP(HyperText Transfer Protocol)는 클라이언트(브라우저, 앱)가 서버(웹 서버, API 서버)에 요청(Request)을 보내고 응답(Response)을 받기 위한 통신 규칙(프로토콜)이다.
 
@@ -712,7 +715,7 @@ HTTP vs HTTPS
 - HTTP: 평문 통신, 포트 80  
 - HTTPS: SSL/TLS 암호화, 포트 443  
 
-## 4-2. 브라우저에 URL 입력 후 요청/응답 과정
+## 5-2. 브라우저에 URL 입력 후 요청/응답 과정
 
 1. URL 입력  
 2. DNS 조회 (Domain → IP)  
