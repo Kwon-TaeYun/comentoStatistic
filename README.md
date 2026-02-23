@@ -1,3 +1,6 @@
+# ER 다이어그램
+<img width="1052" height="693" alt="image" src="https://github.com/user-attachments/assets/4a06d59f-32b3-4cda-bd2b-5ff68199d7f3" />
+
 | **버전** | **변경일** | **변경 사유** | **변경 내역** |
 | --- | --- | --- | --- |
 | 1.0 | 2026-01-03 | 최초 작성 | 최초 작성 |
