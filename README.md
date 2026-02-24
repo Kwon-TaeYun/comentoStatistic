@@ -726,11 +726,7 @@ Query Parameter
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/61044259-4683-43e4-868c-0af5c387a00b" />
 
 ---
-##  7. 🚨 트러블슈팅 (Trouble-Shooting)
-### 7-1. 트러블 슈팅 #1 ()
-
----
-##  8. 🧪 테스트 전략
+##  7. 🧪 테스트 전략
 ### 🧪 테스트
 - JUnit 기반 서비스 레이어 테스트 작성
 - 정상 케이스 / 예외 케이스 분리 검증
