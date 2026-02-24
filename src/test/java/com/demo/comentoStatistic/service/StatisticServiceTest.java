@@ -15,6 +15,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class StatisticServiceTest {
+
     @Mock
     private StatisticMapper statisticMapper;
 
@@ -31,6 +32,7 @@ public class StatisticServiceTest {
     ========================= */
 
     @Test
+    @DisplayName("연도 로그인 조회 - 정상 케이스")
     void getYearLogins_success() {
         YearCountDto dto = new YearCountDto();
         dto.setTotCnt(10);
@@ -43,12 +45,14 @@ public class StatisticServiceTest {
     }
 
     @Test
+    @DisplayName("연도 로그인 조회 - 잘못된 연도 형식이면 예외 발생")
     void getYearLogins_invalidFormat() {
         assertThatThrownBy(() -> statisticService.getYearLogins("2024"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
+    @DisplayName("연도 로그인 조회 - 데이터가 없으면 예외 발생")
     void getYearLogins_noData() {
         when(statisticMapper.selectYearLogin("24")).thenReturn(null);
 
@@ -61,6 +65,7 @@ public class StatisticServiceTest {
     ========================= */
 
     @Test
+    @DisplayName("연월 로그인 조회 - 정상 케이스")
     void getYearMonthLogins_success() {
         YearMonthCountDto dto = new YearMonthCountDto();
         dto.setTotCnt(5);
@@ -75,6 +80,7 @@ public class StatisticServiceTest {
     }
 
     @Test
+    @DisplayName("연월 로그인 조회 - 존재하지 않는 월이면 예외 발생")
     void getYearMonthLogins_invalidMonth() {
         assertThatThrownBy(() ->
                 statisticService.getYearMonthLogins("24", "13"))
@@ -86,6 +92,7 @@ public class StatisticServiceTest {
     ========================= */
 
     @Test
+    @DisplayName("연월일 로그인 조회 - 정상 케이스")
     void getYearMonthDayLogins_success() {
         YearMonthDayCountDto dto = new YearMonthDayCountDto();
         dto.setTotCnt(3);
@@ -100,6 +107,7 @@ public class StatisticServiceTest {
     }
 
     @Test
+    @DisplayName("연월일 로그인 조회 - 존재하지 않는 일이면 예외 발생")
     void getYearMonthDayLogins_invalidDay() {
         assertThatThrownBy(() ->
                 statisticService.getYearMonthDayLogins("24", "01", "32"))
@@ -111,6 +119,7 @@ public class StatisticServiceTest {
     ========================= */
 
     @Test
+    @DisplayName("전체 로그인 조회 - 정상 케이스")
     void getAllLogins_success() {
         LoginCountDto dto = new LoginCountDto();
         dto.setTotCnt(100);
@@ -127,6 +136,7 @@ public class StatisticServiceTest {
     ========================= */
 
     @Test
+    @DisplayName("평균 일간 로그인 조회 - 데이터 없으면 0 반환")
     void getAvgDailyLogin_null() {
         when(statisticMapper.selectAvgDailyLogin()).thenReturn(null);
 
@@ -142,6 +152,7 @@ public class StatisticServiceTest {
     ========================= */
 
     @Test
+    @DisplayName("전체 로그인 요청 조회 - 데이터 없으면 0 반환")
     void getLoginRequests_null() {
         when(statisticMapper.selectAllLoginRequest())
                 .thenReturn(null);
@@ -157,6 +168,7 @@ public class StatisticServiceTest {
     ========================= */
 
     @Test
+    @DisplayName("일별 로그인 요청 조회 - 정상 케이스")
     void getLoginRequestByDay_success() {
         LoginRequestDayCountDto dto =
                 new LoginRequestDayCountDto();
@@ -173,6 +185,7 @@ public class StatisticServiceTest {
     }
 
     @Test
+    @DisplayName("일별 로그인 요청 조회 - 데이터 없으면 예외 발생")
     void getLoginRequestByDay_noData() {
         when(statisticMapper
                 .selectYearMonthDayLoginRequest("240101"))
@@ -189,6 +202,7 @@ public class StatisticServiceTest {
     ========================= */
 
     @Test
+    @DisplayName("부서 로그인 사용자 수 조회 - 정상 케이스")
     void getLoginByDepartment_success() {
         DepartmentUserCountDto dto =
                 new DepartmentUserCountDto();
@@ -206,6 +220,7 @@ public class StatisticServiceTest {
     }
 
     @Test
+    @DisplayName("부서 로그인 사용자 수 조회 - 부서가 존재하지 않으면 예외 발생")
     void getLoginByDepartment_notExist() {
         when(statisticMapper
                 .selectConnectedUserCountByDepartment("IT"))
@@ -221,6 +236,7 @@ public class StatisticServiceTest {
     ========================= */
 
     @Test
+    @DisplayName("부서 월별 로그인 사용자 수 조회 - 정상 케이스")
     void getDepartmentMonthUserCount_success() {
         DepartmentMonthUserCountDto dto =
                 new DepartmentMonthUserCountDto();
@@ -240,6 +256,7 @@ public class StatisticServiceTest {
     }
 
     @Test
+    @DisplayName("부서 월별 로그인 사용자 수 조회 - 로그인 이력이 없으면 예외 발생")
     void getDepartmentMonthUserCount_noLoginData() {
         DepartmentMonthUserCountDto dto =
                 new DepartmentMonthUserCountDto();
@@ -261,6 +278,7 @@ public class StatisticServiceTest {
     ========================= */
 
     @Test
+    @DisplayName("사용자 게시글 요약 조회 - 정상 케이스")
     void getUserBoardSummary_success() {
         when(statisticMapper
                 .selectBoardCountByUserId("user1"))
@@ -277,6 +295,7 @@ public class StatisticServiceTest {
     }
 
     @Test
+    @DisplayName("사용자 게시글 요약 조회 - 게시글이 없으면 예외 발생")
     void getUserBoardSummary_noBoard() {
         when(statisticMapper
                 .selectBoardCountByUserId("user1"))
@@ -292,6 +311,7 @@ public class StatisticServiceTest {
     ========================= */
 
     @Test
+    @DisplayName("공휴일 제외 로그인 수 조회 - 데이터 없으면 0 반환")
     void getLoginCountExcludeHoliday_null() {
         when(statisticMapper
                 .selectLoginCountExcludeHoliday())
