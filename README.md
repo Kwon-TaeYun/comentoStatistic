@@ -230,6 +230,7 @@ Query Parameter
 | --- | --- | --- |
 | 400 | year는 2자리 숫자여야 합니다. | year 파라미터 형식이 잘못된 경우 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
+---
 
 ### 📌 2. 월별 접속자 수(로그인 수) 조회
 
@@ -275,6 +276,7 @@ Query Parameter
 | 400 | `month는 01~12 사이여야 합니다.` | month 파라미터 범위가 잘못된 경우 |
 | 400 | `27년 08월의 로그인 데이터가 없습니다.` | 해당 년도, 월의 로그인 데이터가 없을 경우 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
+---
 
 ### 📌 3. 일별 접속자 수(로그인 수) 조회
 
@@ -324,6 +326,7 @@ Query Parameter
 | 400 | `24년 09월 31일의 로그인 데이터가 없습니다.` | 해당 년도, 월, 일의 로그인 데이터가 없을 경우 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 
+---
 ### 📌 4. 전체 접속자 수(로그인 수) 조회
 
 ### 🔹 [GET] `/api/v1/logins` - 전체 접속자 수(로그인 수) 조회
@@ -352,6 +355,7 @@ Query Parameter
 }
 
 ```
+---
 
 ### 📌 5. 부서 별 접속자 수 조회
 
@@ -393,6 +397,8 @@ Query Parameter
 | 400 | `존재하지 않는 부서입니다."` | 존재하지 않는 부서명 일 때 |
 | 400 | `해당 부서의 접속자 수가 없습니다.` | 해당 부서의 접속자 수가 없을 때 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
+
+---
 
 ### 📌 6. 부서 별 월 별 접속자 수 조회
 
@@ -441,6 +447,8 @@ Query Parameter
 | 400 | `month는 01~12 사이여야 합니다.` | month 파라미터 형식이 잘못된 경우 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 
+---
+
 ### 📌 7. 평균 하루 접속자 수 조회
 
 ### 🔹 [GET] `/api/v1/logins/statistic/daily-average` - 평균 하루 접속자 수 조회
@@ -474,6 +482,8 @@ Query Parameter
 | --- | --- | --- |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 
+---
+
 ### 📌 8. 휴일 제외 접속자 수 조회
 
 ### 🔹 [GET] `/api/v1/logins/statistic/exclude-holidays` - 휴일 제외 접속자 수 조회
@@ -503,6 +513,8 @@ Query Parameter
 | 코드 | 메시지 | 설명 |
 | --- | --- | --- |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
+
+---
 
 ### 📌 9. 전체 로그인 요청 수 조회
 
@@ -535,6 +547,8 @@ Query Parameter
 | 코드 | 메시지 | 설명 |
 | --- | --- | --- |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
+
+---
 
 ### 📌 10. 해당 날짜 로그인 요청 수 조회
 
@@ -583,6 +597,8 @@ Query Parameter
 | 400 | `year, month, day는 함께 전달되어야 합니다.` | 해당 년도, 월, 일이 한번에 전달하지 않은 경우 |
 | 400 | `해당 날짜의 로그인 요청이 없습니다.` | 해당 년도, 월, 일의 로그인 데이터가 없을 경우 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
+
+---
 
 ### 📌 11. 게시글 작성 수 조회
 
@@ -658,60 +674,60 @@ Query Parameter
 
 ## 6. 📷 실행 화면
 
-## 📌 1. 년도별 접속자 수(로그인 수) 조회
+### 📌 1. 년도별 접속자 수(로그인 수) 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/8c5e1a20-df1f-42bc-b879-fd64fc700537" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/4fa6fb89-8cfb-45f9-ba94-a2ad7b342ed5" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/487861cc-a6a5-4816-a783-ce39f594011b" />
 
-## 📌 2. 월별 접속자 수(로그인 수) 조회
+### 📌 2. 월별 접속자 수(로그인 수) 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/d399eda7-745a-4f64-b7d6-bacb5b7b51ec" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/200f09ef-be48-4ff6-9393-d0d78f9213e8" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/38c92569-946c-49a8-9b02-5f4cf07c835c" />
 
-## 📌 3. 일별 접속자 수(로그인 수) 조회
+### 📌 3. 일별 접속자 수(로그인 수) 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/07ebbb8c-1b68-411e-bb9f-fd3fd5670516" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/d85e7307-b2c6-4fe0-98ce-ff4c1be57fc4" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/b8748e49-3ac7-4e5e-9ca0-fb37bcf3df9f" />
 
-## 📌 4. 전체 접속자 수(로그인 수) 조회
+### 📌 4. 전체 접속자 수(로그인 수) 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/4fb8d331-55c2-42e7-9164-437a8cb3f2de" />
 
-## 📌 5. 부서별 접속자 수(로그인 수) 조회
+### 📌 5. 부서별 접속자 수(로그인 수) 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/e6c467b6-57c9-4813-9103-dd2b4dc52436" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/d600a107-ace8-45ee-a340-86f9c8aed79c" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/2e2c3614-1933-43f6-8f40-073e7d282ac9" />
 
-## 📌 6. 부서별 월 별 접속자 수(로그인 수) 조회
+### 📌 6. 부서별 월 별 접속자 수(로그인 수) 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/28303df7-f1b1-4fc9-9d0e-61cd915042ee" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/23f3c193-1724-4561-ae98-f20f2dbab47e" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/e8204030-3c48-4750-9b62-8e518f34aacd" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/86ecabfa-49d6-4b3a-8fb2-6301b1b62902" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/18e0613d-e56e-47d2-998d-c7e7f144a4eb" />
 
-## 📌 7. 평균 하루 접속자 수(로그인 수) 조회
+### 📌 7. 평균 하루 접속자 수(로그인 수) 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/f2518bca-b7d5-4314-903f-8aa2bcaacae2" />
 
-## 📌 8. 휴일 제외 접속자 수(로그인 수) 조회
+### 📌 8. 휴일 제외 접속자 수(로그인 수) 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/731a3fbc-32f9-4dc9-a44c-42f29175cf7a" />
 <img width="496" height="440" alt="image" src="https://github.com/user-attachments/assets/db62696a-585f-4f7e-84fd-d19b3ace5986" />
 
-## 📌 9. 전체 로그인 요청 수 조회
+### 📌 9. 전체 로그인 요청 수 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/97635a31-2d59-404f-a445-890682309ed2" />
 
-## 📌 10. 해당 날짜 로그인 요청 수 조회
+### 📌 10. 해당 날짜 로그인 요청 수 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/13dcf3c2-debd-484d-9146-fa740b9e7790" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/f42c4da1-4627-45f2-be72-6800a14554a8" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/c2cfb946-774d-44fe-8d84-13e57ff36e35" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/338ecd3a-6434-4a6d-917d-8cd7e1ea9665" />
 
-## 📌 11. 게시글 작성 수 조회
+### 📌 11. 게시글 작성 수 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/cc38d398-6242-481b-a853-2adf4ef23861" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/13492e5e-3bc5-40c9-a729-b18b04c5f00d" />
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/61044259-4683-43e4-868c-0af5c387a00b" />
 
 ---
-# 4. 트러블 슈팅 (Trouble-Shooting)
-## 4-1. 트러블 슈팅 #1 ()
+##  7. 🚨 트러블슈팅 (Trouble-Shooting)
+### 7-1. 트러블 슈팅 #1 ()
 
 ---
 
