@@ -45,14 +45,16 @@
 
 ---
 
+## 5. API 문서
+
 | **버전** | **변경일** | **변경 사유** | **변경 내역** |
 | --- | --- | --- | --- |
 | 1.0 | 2026-01-03 | 최초 작성 | 최초 작성 |
 | 2.0 | 2026-01-16 | API 명세서 내용 추가 | 변경중 |
 
-# 1. 1차 API 문서
+## 5-1. 1차 API 문서
 
-## 📌 1. 접속자 수 조회
+### 📌 1. 접속자 수 조회
 
 ### 🔹 [GET] /comento/users - 접속자 수 조회
 
@@ -75,7 +77,7 @@
 
 ---
 
-## 📌 2. 부서 별 접속자 수 조회
+### 📌 2. 부서 별 접속자 수 조회
 
 ### 🔹 [GET] /comento/users/{department_id} - 부서 별 접속자 수 조회
 
@@ -105,7 +107,7 @@ Path Variable
 
 ---
 
-## 📌 3. 해당 날짜 로그인 요청 수 조회
+### 📌 3. 해당 날짜 로그인 요청 수 조회
 
 ### 🔹 [GET] /comento/logins/count?date={login_date}
 
@@ -132,7 +134,7 @@ Query Parameter
 
 ---
 
-## 📌 4. 전체 로그인 요청 수 조회
+### 📌 4. 전체 로그인 요청 수 조회
 
 ### 🔹 [GET] /comento/logins/count
 
@@ -154,7 +156,7 @@ Query Parameter
 
 ---
 
-## 📌 5. 게시글 작성 수 조회
+### 📌 5. 게시글 작성 수 조회
 
 ### 🔹 [GET] /comento/posts/count
 
@@ -185,9 +187,9 @@ Query Parameter
 - Notion: https://www.notion.so/API-2dd98cfebe1e80d68de2cbf9e0749274  
 
 ---
-# 2. 2차 API 문서 (V2.0)
+## 5-2. 2차 API 문서 (V2.0)
 
-## 📌 1. 년도 별 접속자 수(로그인 수) 조회
+### 📌 1. 년도 별 접속자 수(로그인 수) 조회
 
 ### 🔹 [GET] `/api/v1/logins` - 년도 별 접속자 수(로그인 수) 조회
 
@@ -229,7 +231,7 @@ Query Parameter
 | 400 | year는 2자리 숫자여야 합니다. | year 파라미터 형식이 잘못된 경우 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 
-## 📌 2. 월별 접속자 수(로그인 수) 조회
+### 📌 2. 월별 접속자 수(로그인 수) 조회
 
 ### 🔹 [GET] `/api/v1/logins` - 월별 접속자 수(로그인 수) 조회
 
@@ -274,7 +276,7 @@ Query Parameter
 | 400 | `27년 08월의 로그인 데이터가 없습니다.` | 해당 년도, 월의 로그인 데이터가 없을 경우 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 
-## 📌 3. 일별 접속자 수(로그인 수) 조회
+### 📌 3. 일별 접속자 수(로그인 수) 조회
 
 ### 🔹 [GET] `/api/v1/logins` - 일별 접속자 수(로그인 수) 조회
 
@@ -322,7 +324,7 @@ Query Parameter
 | 400 | `24년 09월 31일의 로그인 데이터가 없습니다.` | 해당 년도, 월, 일의 로그인 데이터가 없을 경우 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 
-## 📌 4. 전체 접속자 수(로그인 수) 조회
+### 📌 4. 전체 접속자 수(로그인 수) 조회
 
 ### 🔹 [GET] `/api/v1/logins` - 전체 접속자 수(로그인 수) 조회
 
@@ -351,7 +353,7 @@ Query Parameter
 
 ```
 
-## 📌 5. 부서 별 접속자 수 조회
+### 📌 5. 부서 별 접속자 수 조회
 
 ### 🔹 [GET] `/api/v1/logins/departments` - 부서 별 접속자 수 조회
 
@@ -392,7 +394,7 @@ Query Parameter
 | 400 | `해당 부서의 접속자 수가 없습니다.` | 해당 부서의 접속자 수가 없을 때 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 
-## 📌 6. 부서 별 월 별 접속자 수 조회
+### 📌 6. 부서 별 월 별 접속자 수 조회
 
 ### 🔹 [GET] `/api/v1/logins/departments` - 부서 별, 월 별 접속자 수 조회
 
@@ -439,7 +441,7 @@ Query Parameter
 | 400 | `month는 01~12 사이여야 합니다.` | month 파라미터 형식이 잘못된 경우 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 
-## 📌 7. 평균 하루 접속자 수 조회
+### 📌 7. 평균 하루 접속자 수 조회
 
 ### 🔹 [GET] `/api/v1/logins/statistic/daily-average` - 평균 하루 접속자 수 조회
 
@@ -472,7 +474,7 @@ Query Parameter
 | --- | --- | --- |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 
-## 📌 8. 휴일 제외 접속자 수 조회
+### 📌 8. 휴일 제외 접속자 수 조회
 
 ### 🔹 [GET] `/api/v1/logins/statistic/exclude-holidays` - 휴일 제외 접속자 수 조회
 
@@ -502,7 +504,7 @@ Query Parameter
 | --- | --- | --- |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 
-## 📌 9. 전체 로그인 요청 수 조회
+### 📌 9. 전체 로그인 요청 수 조회
 
 ### 🔹 [GET] `/api/v1/requests` - 전체 로그인 요청 수 조회
 
@@ -534,7 +536,7 @@ Query Parameter
 | --- | --- | --- |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 
-## 📌 10. 해당 날짜 로그인 요청 수 조회
+### 📌 10. 해당 날짜 로그인 요청 수 조회
 
 ### 🔹 [GET] `/api/v1/requests` - 해당 날짜 로그인 요청 수 조회
 
@@ -582,7 +584,7 @@ Query Parameter
 | 400 | `해당 날짜의 로그인 요청이 없습니다.` | 해당 년도, 월, 일의 로그인 데이터가 없을 경우 |
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 
-## 📌 11. 게시글 작성 수 조회
+### 📌 11. 게시글 작성 수 조회
 
 ### 🔹 [GET] `/api/v1/boards` - 게시글 작성 수 조회
 
@@ -649,12 +651,12 @@ Query Parameter
 | 500 | INTERNAL_SERVER_ERROR | 서버 내부 오류 |
 ---
 
-## 작성 문서
+### 작성 문서
 - Notion: https://www.notion.so/API-2dd98cfebe1e800cb6aee4c130de4303?source=copy_link
 
 ---
 
-# 3. 실행 화면
+## 6. 📷 실행 화면
 
 ## 📌 1. 년도별 접속자 수(로그인 수) 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/8c5e1a20-df1f-42bc-b879-fd64fc700537" />
