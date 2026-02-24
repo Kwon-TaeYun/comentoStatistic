@@ -730,10 +730,19 @@ Query Parameter
 ### 7-1. 트러블 슈팅 #1 ()
 
 ---
+##  8. 🧪 테스트 전략
+### 🧪 테스트
+- JUnit 기반 서비스 레이어 테스트 작성
+- 정상 케이스 / 예외 케이스 분리 검증
+- Validation 로직 단위 테스트
+<img width="1650" height="746" alt="image" src="https://github.com/user-attachments/assets/bcf3908d-5831-4be5-99fb-40946f0d06c2" />
 
-# 5. REST API
 
-## 5-1. HTTP 통신이란?
+
+---
+## 기타. REST API
+
+### 5-1. HTTP 통신이란?
 
 HTTP(HyperText Transfer Protocol)는 클라이언트(브라우저, 앱)가 서버(웹 서버, API 서버)에 요청(Request)을 보내고 응답(Response)을 받기 위한 통신 규칙(프로토콜)이다.
 
@@ -776,7 +785,7 @@ HTTP vs HTTPS
 - HTTP: 평문 통신, 포트 80  
 - HTTPS: SSL/TLS 암호화, 포트 443  
 
-## 5-2. 브라우저에 URL 입력 후 요청/응답 과정
+### 5-2. 브라우저에 URL 입력 후 요청/응답 과정
 
 1. URL 입력  
 2. DNS 조회 (Domain → IP)  
