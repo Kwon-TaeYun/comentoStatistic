@@ -672,7 +672,7 @@ Query Parameter
 
 ---
 
-## 6. 📷 실행 화면
+## 📷 6. 실행 화면
 
 ### 📌 1. 년도별 접속자 수(로그인 수) 조회
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/8c5e1a20-df1f-42bc-b879-fd64fc700537" />
@@ -726,7 +726,7 @@ Query Parameter
 <img width="637" height="511" alt="image" src="https://github.com/user-attachments/assets/61044259-4683-43e4-868c-0af5c387a00b" />
 
 ---
-##  7. 🧪 테스트 전략
+## 🧪 7. 테스트 전략
 ### 🧪 테스트
 - JUnit 기반 서비스 레이어 테스트 작성
 - 정상 케이스 / 예외 케이스 분리 검증
@@ -736,64 +736,53 @@ Query Parameter
 
 
 ---
-## 기타. REST API
 
-### 5-1. HTTP 통신이란?
+## 🏗 8. 설계 의도 및 확장 과정
 
-HTTP(HyperText Transfer Protocol)는 클라이언트(브라우저, 앱)가 서버(웹 서버, API 서버)에 요청(Request)을 보내고 응답(Response)을 받기 위한 통신 규칙(프로토콜)이다.
+### 1️⃣ 통계 시스템을 별도 구조로 설계한 이유
 
-HTTP 통신 구조  
-HTTP는 요청(Request) → 응답(Response) 구조로 동작한다.
+단순 조회 API가 아닌,
+서비스 이용 패턴을 분석하기 위한 통계 전용 백엔드 시스템으로 설계했습니다.
 
-요청(Request) 구성 요소  
-- 메서드 (GET, POST 등)  
-- URL  
-- Header  
-- Body (선택)  
+일반 CRUD와 분리하여 통계 로직을 독립시킴으로써,
+추후 통계 항목이 추가되더라도 기존 서비스 로직에 영향을 주지 않도록 확장성을 고려했습니다.
 
-응답(Response) 구성 요소  
-- 상태 코드  
-- Header  
-- Body  
+---
 
-HTTP 특징  
-- 무상태성(Stateless): 서버는 이전 요청을 기억하지 않음 (쿠키, 세션, JWT로 보완)  
-- 비연결성(Connectionless): 요청/응답 후 연결 종료 (HTTP/1.1 Keep-Alive)  
-- 텍스트 기반 통신(JSON, HTML 등)  
+### 2️⃣ V1 → V2 확장 배경
 
-HTTP 메서드  
-- GET: 조회  
-- POST: 생성  
-- PUT: 전체 수정  
-- PATCH: 일부 수정  
-- DELETE: 삭제  
+초기 버전(V1)은 단순 접속자 수 조회 기능만 제공했습니다.
 
-HTTP 상태 코드  
-- 200 성공  
-- 201 생성 성공  
-- 400 잘못된 요청  
-- 401 인증 필요  
-- 403 권한 없음  
-- 404 리소스 없음  
-- 500 서버 오류  
+그러나 실무 환경에서는
+- 월별 트렌드 분석
+- 특정 날짜 비교
+- 부서 단위 성과 분석
 
-HTTP vs HTTPS  
-- HTTP: 평문 통신, 포트 80  
-- HTTPS: SSL/TLS 암호화, 포트 443  
+과 같은 세부 통계 요구가 발생할 수 있다고 판단했습니다.
 
-### 5-2. 브라우저에 URL 입력 후 요청/응답 과정
+이에 따라 V2에서는
+- 연/월/일 단위 필터링
+- 부서 + 월 복합 조건 조회
+- 평균/휴일 제외 통계 기능
 
-1. URL 입력  
-2. DNS 조회 (Domain → IP)  
-3. TCP 연결 (3-way handshake)  
-4. TLS 핸드셰이크 (HTTPS)  
-5. HTTP 요청 전송  
-6. 서버 처리 (Filter → Interceptor → Controller → Service → DB)  
-7. HTTP 응답 반환  
-8. 브라우저 렌더링 (DOM → CSSOM → Render Tree → Layout → Paint)  
-9. 추가 리소스 요청 (CSS, JS, Image)
+을 추가하여 실무 활용성을 강화했습니다.
 
-전체 흐름 요약  
-URL 입력 → DNS → TCP → TLS → HTTP 요청 → 서버 처리 → HTTP 응답 → 브라우저 렌더링
+---
+
+### 3️⃣ 데이터 정합성 보장 전략
+
+통계 시스템에서 가장 중요한 요소는 **정확성**이라고 판단했습니다.
+
+이를 위해 다음과 같은 방어 로직을 설계했습니다.
+
+- year는 2자리 숫자(YY)만 허용
+- month는 01~12 범위 검증
+- day는 01~31 범위 검증
+- year/month/day는 함께 전달되도록 강제
+- 존재하지 않는 날짜 데이터 조회 시 명확한 예외 메시지 반환
+
+단순 null 반환이 아닌,
+의도된 예외 정책을 통해 잘못된 통계 요청을 사전에 차단하도록 설계했습니다.
+
 
 
