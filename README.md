@@ -24,7 +24,6 @@
 - Java
 - Spring Boot
 - Spring MVC
-- JPA
 - MyBatis
 
 ### 🗄 Database
